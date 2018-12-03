@@ -10,38 +10,11 @@ export async function queryActivities() {
 }
 
 export async function queryRule(params) {
-  return request(`/api/rule?${stringify(params)}`);
+  return request(`/server/api/user/list?${stringify(params)}`, { method: 'post' });
 }
-
-export async function removeRule(params) {
-  return request('/api/rule', {
-    method: 'POST',
-    body: {
-      ...params,
-      method: 'delete',
-    },
-  });
-}
-
-export async function addRule(params) {
-  return request('/api/rule', {
-    method: 'POST',
-    body: {
-      ...params,
-      method: 'post',
-    },
-  });
-}
-
-export async function updateRule(params) {
-  return request('/api/rule', {
-    method: 'POST',
-    body: {
-      ...params,
-      method: 'update',
-    },
-  });
-}
+// export async function queryRule(params) {
+//   return request(`http://localhost:7001/user/list?${stringify(params)}`,{method:'post'});
+// }
 
 export async function fakeSubmitForm(params) {
   return request('/api/forms', {
