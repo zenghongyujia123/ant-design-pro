@@ -10,7 +10,7 @@ export async function queryActivities() {
 }
 
 export async function queryRule(params) {
-  return request(`/server/api/user/list?${stringify(params)}`, { method: 'post' });
+  return request(`http://localhost:7001/server/api/user/list?${stringify(params)}`, { method: 'post' });
 }
 // export async function queryRule(params) {
 //   return request(`http://localhost:7001/user/list?${stringify(params)}`,{method:'post'});

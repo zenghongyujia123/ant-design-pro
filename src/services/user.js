@@ -1,6 +1,6 @@
 import request from '@/utils/request';
 import { stringify } from 'qs';
-
+const baseUrl = 'http://m.chaoqianwang.com'
 export async function query() {
   return request('/api/users');
 }
@@ -10,8 +10,8 @@ export async function queryCurrent() {
 }
 
 export async function userlist(params) {
-  return request(`/server/api/user/list?${stringify(params)}`, { method: 'post' });
+  return request(`${baseUrl}/user/list?${stringify(params)}`, { method: 'post' });
 }
 export async function orderlist(params) {
-  return request(`/server/api/order/list?${stringify(params)}`, { method: 'post' });
+  return request(`${baseUrl}/order/list?${stringify(params)}`, { method: 'post' });
 }
