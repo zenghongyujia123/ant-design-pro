@@ -74,7 +74,8 @@ export default {
   },
   proxy: {
     '/server/api/': {
-      target: 'http://localhost:7001/',
+      // target: 'http://localhost:7001/',
+      target: 'http://d.chaoqianwang.com/',
       changeOrigin: true,
       pathRewrite: { '^/server/api': '' },
     },
