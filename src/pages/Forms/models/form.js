@@ -1,6 +1,7 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
 import { fakeSubmitForm } from '@/services/api';
+import { yifangcreate } from '@/services/user';
 
 export default {
   namespace: 'form',
@@ -15,6 +16,16 @@ export default {
   },
 
   effects: {
+    *yifangcreate({ payload }, { call ,put}) {
+      let res = yield call(yifangcreate, payload);
+      if (res.err_msg)
+        message.error(res.err_msg);
+      else {
+        message.success('提交成功');
+        yield put(routerRedux.push('/list/yifang-list', {}));
+      }
+    },
+
     *submitRegularForm({ payload }, { call }) {
       yield call(fakeSubmitForm, payload);
       message.success('提交成功');

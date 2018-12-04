@@ -6,6 +6,8 @@ export default {
   'menu.dashboard.workplace': '工作台',
   'menu.form': '表单页',
   'menu.form.basicform': '基础表单',
+  'menu.form.yifangdetail': '乙方详情',
+  
   'menu.form.stepform': '分步表单',
   'menu.form.stepform.info': '分步表单（填写转账信息）',
   'menu.form.stepform.confirm': '分步表单（确认转账信息）',
@@ -15,6 +17,7 @@ export default {
   'menu.list.searchtable': '查询列表',
   'menu.list.usertable': '用户列表',
   'menu.list.ordertable': '订单列表',
+  'menu.list.yifangtable': '乙方列表',
   'menu.list.basiclist': '标准列表',
   'menu.list.cardlist': '卡片列表',
   'menu.list.searchlist': '搜索列表',

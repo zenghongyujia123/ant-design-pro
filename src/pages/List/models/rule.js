@@ -1,4 +1,4 @@
-import { userlist, orderlist } from '@/services/user';
+import { userlist, orderlist, yifanglist } from '@/services/user';
 
 export default {
   namespace: 'rule',
@@ -25,6 +25,13 @@ export default {
         payload: response,
       });
     },
+    *yifanglist({ payload }, { call, put }) {
+      const response = yield call(yifanglist, payload);
+      yield put({
+        type: 'save',
+        payload: response,
+      });
+    }
   },
 
   reducers: {
