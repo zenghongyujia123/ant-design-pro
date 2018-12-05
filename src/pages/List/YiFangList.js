@@ -59,11 +59,13 @@ class TableList extends PureComponent {
       dataIndex: 'nickname',
     },
     {
+      title: '密码',
+      dataIndex: 'password',
+    },
+    {
       title: '落地页链接',
       dataIndex: 'url',
     },
-
-    
     // {
     //   title: '操作',
     //   render: (text, record) => (
@@ -168,8 +170,8 @@ class TableList extends PureComponent {
               查询
             </Button>
             <a href="/form/yifang-detail">
-            <Button icon="plus" type="primary" style={{ marginLeft: '10px' }}>
-              新建
+              <Button icon="plus" type="primary" style={{ marginLeft: '10px' }}>
+                新建
             </Button>
             </a>
           </div>

@@ -11,14 +11,14 @@ export async function queryCurrent() {
 }
 
 export async function userlist(params) {
-  return request(`${baseUrl}/user/list?${stringify(params)}`, { method: 'POST' });
+  return request(`${baseUrl}/user/list`, { method: 'POST', body: params });
 }
 export async function orderlist(params) {
-  return request(`${baseUrl}/order/list?${stringify(params)}`, { method: 'POST' });
+  return request(`${baseUrl}/order/list`, { method: 'POST', body: params });
 }
 export async function yifanglist(params) {
-  return request(`${baseUrl}/yifang/list?${stringify(params)}`, { method: 'POST' });
+  return request(`${baseUrl}/yifang/list`, { method: 'POST', body: params });
 }
 export async function yifangcreate(params) {
-  return request(`${baseUrl}/yifang/create?${stringify(params)}`, { method: 'POST', body: params });
+  return request(`${baseUrl}/yifang/create`, { method: 'POST', body: params });
 }
