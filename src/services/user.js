@@ -22,3 +22,7 @@ export async function yifanglist(params) {
 export async function yifangcreate(params) {
   return request(`${baseUrl}/yifang/create`, { method: 'POST', body: params });
 }
+
+export async function userlogin(params) {
+  return request(`${baseUrl}/d/user/dsignin`, { method: 'POST', body: params });
+}

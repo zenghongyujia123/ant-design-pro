@@ -3,6 +3,7 @@ import { notification } from 'antd';
 import router from 'umi/router';
 import hash from 'hash.js';
 import { isAntdPro } from './utils';
+import { message } from 'antd';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -21,7 +22,6 @@ const codeMessage = {
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
 };
-
 const checkStatus = response => {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -92,6 +92,7 @@ export default function request(url, option) {
         Accept: 'application/json',
         'Content-Type': 'application/json; charset=utf-8',
         ...newOptions.headers,
+        top_session: localStorage.getItem('top_session'),
       };
       newOptions.body = JSON.stringify(newOptions.body);
     } else {
@@ -99,6 +100,7 @@ export default function request(url, option) {
       newOptions.headers = {
         Accept: 'application/json',
         ...newOptions.headers,
+        top_session: localStorage.getItem('top_session'),
       };
     }
   }
@@ -127,6 +129,17 @@ export default function request(url, option) {
       if (newOptions.method === 'DELETE' || response.status === 204) {
         return response.text();
       }
+
+      // let res = await response.json();
+
+      // if (res.msg) {
+      //   message.info(res.msg);
+      // }
+
+      // if (res.err_msg) {
+      //   message.error(res.msg);
+      // }
+
       return response.json();
     })
     .catch(e => {

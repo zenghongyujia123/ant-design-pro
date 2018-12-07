@@ -1,6 +1,9 @@
 import { routerRedux } from 'dva/router';
 import { stringify } from 'qs';
 import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
+
+
+import { userlogin } from '@/services/user';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
@@ -14,7 +17,11 @@ export default {
 
   effects: {
     *login({ payload }, { call, put }) {
-      const response = yield call(fakeAccountLogin, payload);
+
+      const response = yield call(userlogin, payload);
+
+      console.log(response);
+
       yield put({
         type: 'changeLoginStatus',
         payload: response,
@@ -22,6 +29,9 @@ export default {
       // Login successfully
       if (response.status === 'ok') {
         reloadAuthorized();
+        if (response.top_session) {
+          localStorage.setItem('top_session', response.top_session);
+        }
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;
