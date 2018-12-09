@@ -41,7 +41,7 @@ class BasicForms extends PureComponent {
     data:{},
   };
 
-  componentDidMount() {
+  componentDidMount(params) {
     const { dispatch } = this.props;
     dispatch({
       type: 'form/uptoken',

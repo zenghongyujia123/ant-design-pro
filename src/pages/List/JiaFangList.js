@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
+import { Link } from 'dva/router';
 import moment from 'moment';
 import {
   Row,
@@ -63,7 +64,7 @@ class TableList extends PureComponent {
       title: 'logo',
       dataIndex: 'logo',
       render: (logo) => {
-        return <Avatar style={{borderRadius:0,width:50,height:50}} src={logo} />
+        return <Avatar style={{ borderRadius: 0, width: 50, height: 50 }} src={logo} />
       }
     },
     {
@@ -89,6 +90,15 @@ class TableList extends PureComponent {
     {
       title: '其他4',
       dataIndex: 'str4',
+    },
+    {
+      title: '操作',
+      dataIndex: '_id',
+      render: (_id, record) => (
+        <Fragment>
+          <Link to={{ pathname: '/form/jiafang-detail', query: { _id: _id } }}>详情</Link>
+        </Fragment>
+      ),
     },
     // {
     //   title: '操作',
