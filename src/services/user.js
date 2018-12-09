@@ -1,7 +1,7 @@
 import request from '@/utils/request';
 import { stringify } from 'qs';
-const baseUrl = 'http://m.chaoqianwang.com'
-// const baseUrl = 'http://localhost:7001'
+// const baseUrl = 'http://m.chaoqianwang.com'
+const baseUrl = 'http://localhost:7001'
 export async function query() {
   return request('/api/users');
 }
@@ -21,6 +21,13 @@ export async function yifanglist(params) {
 }
 export async function yifangcreate(params) {
   return request(`${baseUrl}/yifang/create`, { method: 'POST', body: params });
+}
+
+export async function jiafanglist(params) {
+  return request(`${baseUrl}/jiafang/list`, { method: 'POST', body: params });
+}
+export async function jiafangcreate(params) {
+  return request(`${baseUrl}/jiafang/create`, { method: 'POST', body: params });
 }
 
 export async function userlogin(params) {

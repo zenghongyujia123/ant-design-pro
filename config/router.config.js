@@ -10,6 +10,29 @@ export default [
       { path: '/user/register-result', component: './User/RegisterResult' },
     ],
   },
+  // {
+  //   path: '/form',
+  //   icon: 'form',
+  //   name: 'form',
+  //   hideChildrenInMenu: true,
+  //   routes: [
+  //     // {
+  //     //   path: '/form/basic-form',
+  //     //   name: 'basicform',
+  //     //   component: './Forms/BasicForm',
+  //     // },
+  //     {
+  //       path: '/form/yifang-detail',
+  //       name: 'yifangdetail',
+  //       component: './Forms/YiFangDetail',
+  //     },
+  //     {
+  //       path: '/form/jiafang-detail',
+  //       name: 'jiafangdetail',
+  //       component: './Forms/JiaFangDetail',
+  //     }]
+  // },
+
   // app
   {
     path: '/',
@@ -17,87 +40,24 @@ export default [
     Routes: ['src/pages/Authorized'],
     authority: ['admin', 'user'],
     routes: [
-      // { path: '/', redirect: '/dashboard/analysis' },
-      // {
-      //   path: '/dashboard',
-      //   name: 'dashboard',
-      //   icon: 'dashboard',
-      //   routes: [
-      //     {
-      //       path: '/dashboard/analysis',
-      //       name: 'analysis',
-      //       component: './Dashboard/Analysis',
-      //     },
-      //     {
-      //       path: '/dashboard/monitor',
-      //       name: 'monitor',
-      //       component: './Dashboard/Monitor',
-      //     },
-      //     {
-      //       path: '/dashboard/workplace',
-      //       name: 'workplace',
-      //       component: './Dashboard/Workplace',
-      //     },
-      //   ],
-      // },
-      // forms
       {
         path: '/form',
         icon: 'form',
         name: 'form',
         hideChildrenInMenu: true,
         routes: [
-          // {
-          //   path: '/form/basic-form',
-          //   name: 'basicform',
-          //   component: './Forms/BasicForm',
-          // },
           {
             path: '/form/yifang-detail',
             name: 'yifangdetail',
             component: './Forms/YiFangDetail',
           },
-          // {
-          //   path: '/form/step-form',
-          //   name: 'stepform',
-          //   component: './Forms/StepForm',
-          //   hideChildrenInMenu: true,
-          //   routes: [
-          //     {
-          //       path: '/form/step-form',
-          //       redirect: '/form/step-form/info',
-          //     },
-          //     {
-          //       path: '/form/step-form/info',
-          //       name: 'info',
-          //       component: './Forms/StepForm/Step1',
-          //     },
-          //     {
-          //       path: '/form/step-form/confirm',
-          //       name: 'confirm',
-          //       component: './Forms/StepForm/Step2',
-          //     },
-          //     {
-          //       path: '/form/step-form/result',
-          //       name: 'result',
-          //       component: './Forms/StepForm/Step3',
-          //     },
-          //   ],
-          // },
-          // {
-          //   path: '/form/advanced-form',
-          //   name: 'advancedform',
-          //   authority: ['admin'],
-          //   component: './Forms/AdvancedForm',
-          // },
+          {
+            path: '/form/jiafang-detail',
+            name: 'jiafangdetail',
+            component: './Forms/JiaFangDetail',
+          },
         ],
       },
-      //list
-      // {
-      //   path: '/list/table-list',
-      //   name: 'list.searchtable',
-      //   component: './List/TableList',
-      // },
       {
         path: '/list/user-list',
         name: 'list.usertable',
@@ -112,6 +72,11 @@ export default [
         path: '/list/yifang-list',
         name: 'list.yifangtable',
         component: './List/YiFangList',
+      },
+      {
+        path: '/list/jiafang-list',
+        name: 'list.jiafangtable',
+        component: './List/JiaFangList',
       },
     ]
   }
