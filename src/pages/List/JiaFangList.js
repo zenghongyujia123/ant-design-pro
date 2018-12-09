@@ -14,6 +14,7 @@ import {
   Menu,
   InputNumber,
   DatePicker,
+  Avatar,
   Modal,
   message,
   Badge,
@@ -51,20 +52,43 @@ class TableList extends PureComponent {
 
   columns = [
     {
-      title: '账号',
-      dataIndex: 'username',
+      title: '甲方名称',
+      dataIndex: 'name',
     },
     {
-      title: '公司',
-      dataIndex: 'nickname',
+      title: '描述',
+      dataIndex: 'desc',
     },
     {
-      title: '密码',
-      dataIndex: 'password',
+      title: 'logo',
+      dataIndex: 'logo',
+      render: (logo) => {
+        return <Avatar style={{borderRadius:0,width:50,height:50}} src={logo} />
+      }
     },
     {
-      title: '落地页链接',
+      title: '链接',
       dataIndex: 'url',
+    },
+    {
+      title: '短链接',
+      dataIndex: 'url_short',
+    },
+    {
+      title: '其他1',
+      dataIndex: 'str1',
+    },
+    {
+      title: '其他2',
+      dataIndex: 'str2',
+    },
+    {
+      title: '其他3',
+      dataIndex: 'str3',
+    },
+    {
+      title: '其他4',
+      dataIndex: 'str4',
     },
     // {
     //   title: '操作',
@@ -169,7 +193,7 @@ class TableList extends PureComponent {
             <Button type="primary" htmlType="submit">
               查询
             </Button>
-            <a href="/form/yifang-detail">
+            <a href="/form/jiafang-detail">
               <Button icon="plus" type="primary" style={{ marginLeft: '10px' }}>
                 新建
             </Button>

@@ -11,7 +11,10 @@ import {
   InputNumber,
   Radio,
   Icon,
+  message,
+  Upload,
   Tooltip,
+  Modal
 } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import styles from './style.less';
@@ -22,26 +25,56 @@ const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
-@connect(({ loading }) => ({
-  submitting: loading.effects['form/yifangcreate'],
+@connect(({ loading ,form}) => ({
+  data:form.data,
+  submitting: loading.effects['form/jiafangcreate'],
 }))
 @Form.create()
+
 class BasicForms extends PureComponent {
+
+  state = {
+    previewVisible: false,
+    previewImage: '',
+    uploading: false,
+    fileList: [],
+    data:{},
+  };
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'form/uptoken',
+    });
+
+  }
   handleSubmit = e => {
     const { dispatch, form } = this.props;
     e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
+      values.logolist.fileList.forEach(logo => {
+        values.logo = `http://pjgg8ntmh.bkt.clouddn.com/${logo.response.key}`;
+      })
+      delete values.logolist
       if (!err) {
         dispatch({
-          type: 'form/yifangcreate',
+          type: 'form/jiafangcreate',
           payload: values,
         });
       }
     });
   };
 
+
+
+  handleLogoChange = ({ fileList }) => {
+    setTimeout(() => {
+      this.setState({ fileList, uploading: true });
+    })
+  }
+
   render() {
-    const { submitting } = this.props;
+    const { submitting ,data} = this.props;
     const {
       form: { getFieldDecorator, getFieldValue },
     } = this.props;
@@ -65,28 +98,51 @@ class BasicForms extends PureComponent {
       },
     };
 
+    const { previewVisible, previewImage, fileList, uploading } = this.state;
+    const uploadButton = (
+      <div>
+        <Icon type="plus" />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
+
     return (
       <PageHeaderWrapper
-        title='添加乙方'
-        content='用户名不能重复'
+        title='编辑甲方'
+        content='名字不能重复'
       >
         <Card bordered={false}>
           <Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 8 }}>
-            <FormItem {...formItemLayout} label='用户名'>
-              {getFieldDecorator('username', {
-                rules: [{ required: true, message: '请输入用户名' }],
-              })(<Input placeholder='请输入用户名' />)}
+            <FormItem {...formItemLayout} label='甲方名称'>
+              {getFieldDecorator('name', { rules: [{ required: true, message: '请输入甲方名称' }], })(<Input placeholder='请输入甲方名称' />)}
             </FormItem>
-            <FormItem {...formItemLayout} label='密码'>
-              {getFieldDecorator('password', {
-                rules: [{ required: true, message: '请输入密码' }],
-              })(<Input placeholder='请输入密码' />)}
+            <FormItem {...formItemLayout} label='甲方logo'>
+              {getFieldDecorator('logolist', { rules: [{ required: true, message: '请上传甲方logo' }], })(
+                <Upload
+                  action="http://up.qiniu.com"
+                  listType="picture-card"
+                  fileList={fileList}
+                  data={data}
+                  onPreview={this.handleLogoPreview}
+                  onChange={this.handleLogoChange}
+                >
+                  {fileList.length >= 1 ? null : uploadButton}
+                </Upload>
+              )}
+
             </FormItem>
-            <FormItem {...formItemLayout} label='公司名'>
-              {getFieldDecorator('nickname', {
-                rules: [{ required: true, message: '请输入公司名' }],
-              })(<Input placeholder='请输入公司名' />)}
+            <FormItem {...formItemLayout} label='甲方链接'>
+              {getFieldDecorator('url', { rules: [{ required: true, message: '请输入甲方链接' }], })(<Input placeholder='请输入甲方链接' />)}
             </FormItem>
+            <FormItem {...formItemLayout} label='短链接'>
+              {getFieldDecorator('short_url')(<Input disabled placeholder='短链接自动生成' />)}
+            </FormItem>
+            <FormItem {...formItemLayout} label='甲方描述'>{getFieldDecorator('desc', { rules: [{ required: true, message: '请输入甲方描述' }], })(<Input placeholder='请输入甲方描述' />)}</FormItem>
+            <FormItem {...formItemLayout} label='其他1'>  {getFieldDecorator('str1')(<Input placeholder='请输入其他1' />)}</FormItem>
+            <FormItem {...formItemLayout} label='其他2'>{getFieldDecorator('str2')(<Input placeholder='请输入其他2' />)}</FormItem>
+            <FormItem {...formItemLayout} label='其他3'>{getFieldDecorator('str3')(<Input placeholder='请输入其他3' />)}</FormItem>
+            <FormItem {...formItemLayout} label='其他4'>  {getFieldDecorator('str4')(<Input placeholder='请输入其他4' />)}</FormItem>
+
 
             <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
               <Button type="primary" htmlType="submit" loading={submitting}>

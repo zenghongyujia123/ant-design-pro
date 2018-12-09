@@ -33,3 +33,8 @@ export async function jiafangcreate(params) {
 export async function userlogin(params) {
   return request(`${baseUrl}/d/user/dsignin`, { method: 'POST', body: params });
 }
+
+export async function uptoken(params) {
+  return request(`${baseUrl}/qiniu/uptoken`, { method: 'GET', body: params });
+}
+

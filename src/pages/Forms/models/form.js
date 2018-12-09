@@ -1,28 +1,46 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
 import { fakeSubmitForm } from '@/services/api';
-import { yifangcreate } from '@/services/user';
+import { yifangcreate, jiafangcreate, uptoken } from '@/services/user';
 
 export default {
   namespace: 'form',
 
   state: {
-    step: {
-      payAccount: 'ant-design@alipay.com',
-      receiverAccount: 'test@example.com',
-      receiverName: 'Alex',
-      amount: '500',
-    },
+    data:{
+      token:''
+    }
   },
 
   effects: {
-    *yifangcreate({ payload }, { call ,put}) {
+    *yifangcreate({ payload }, { call, put }) {
       let res = yield call(yifangcreate, payload);
       if (res.err_msg)
         message.error(res.err_msg);
       else {
         message.success('提交成功');
         yield put(routerRedux.push('/list/yifang-list', {}));
+      }
+    },
+    *jiafangcreate({ payload }, { call, put }) {
+      let res = yield call(jiafangcreate, payload);
+      if (res.err_msg)
+        message.error(res.err_msg);
+      else {
+        message.success('提交成功');
+        yield put(routerRedux.push('/list/jiafang-list', {}));
+      }
+    },
+    *uptoken({ payload }, { call, put }) {
+      let res = yield call(uptoken, payload);
+      let a = 1;
+      if (res.err_msg)
+        message.error(res.err_msg);
+      else {
+        yield put({
+          type: 'save',
+          payload: res,
+        });
       }
     },
 
@@ -45,13 +63,10 @@ export default {
   },
 
   reducers: {
-    saveStepFormData(state, { payload }) {
+    save(state, action) {
       return {
         ...state,
-        step: {
-          ...state.step,
-          ...payload,
-        },
+        data:action.payload,
       };
     },
   },
