@@ -1,15 +1,16 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
 import { fakeSubmitForm } from '@/services/api';
-import { yifangcreate, jiafangcreate, uptoken } from '@/services/user';
+import { yifangcreate, jiafangcreate, uptoken, jiafangdetail } from '@/services/user';
 
 export default {
   namespace: 'form',
 
   state: {
-    data:{
-      token:''
-    }
+    data: {
+      token: '',
+    },
+    fileList: []
   },
 
   effects: {
@@ -22,6 +23,8 @@ export default {
         yield put(routerRedux.push('/list/yifang-list', {}));
       }
     },
+
+
     *jiafangcreate({ payload }, { call, put }) {
       let res = yield call(jiafangcreate, payload);
       if (res.err_msg)
@@ -29,6 +32,24 @@ export default {
       else {
         message.success('提交成功');
         yield put(routerRedux.push('/list/jiafang-list', {}));
+      }
+    },
+    *jiafangdetail({ payload, callback }, { call, put }) {
+      let res = yield call(jiafangdetail, payload);
+      if (res.err_msg)
+        message.error(res.err_msg);
+      else {
+        res.fileList = [];
+        if (res.logo) {
+          res.fileList = [{ url: res.logo, uid: res.logo, status: 'done' }];
+        }
+        if (callback) {
+          callback(res.fileList);
+        }
+        yield put({
+          type: 'save',
+          payload: res,
+        });
       }
     },
     *uptoken({ payload }, { call, put }) {
@@ -66,7 +87,8 @@ export default {
     save(state, action) {
       return {
         ...state,
-        data:action.payload,
+        data: { ...state.data, ...action.payload },
+        fileList: action.payload.fileList || []
       };
     },
   },

@@ -25,8 +25,9 @@ const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
-@connect(({ loading ,form}) => ({
-  data:form.data,
+@connect(({ loading, form }) => ({
+  fileList:form.fileList,
+  data: form.data,
   submitting: loading.effects['form/jiafangcreate'],
 }))
 @Form.create()
@@ -36,13 +37,25 @@ class BasicForms extends PureComponent {
   state = {
     previewVisible: false,
     previewImage: '',
-    uploading: false,
-    fileList: [],
-    data:{},
+    data: {},
+    fileList:this.props.fileList,
   };
 
-  componentDidMount(params) {
+  componentDidMount() {
     const { dispatch } = this.props;
+    if (this.props.location.query._id) {
+      dispatch({
+        type: 'form/jiafangdetail',
+        payload: {
+          jiafang_id: this.props.location.query._id
+        },
+        callback:(fileList)=>{
+          this.setState({fileList})
+        }
+      });
+    }
+
+
     dispatch({
       type: 'form/uptoken',
     });
@@ -68,17 +81,11 @@ class BasicForms extends PureComponent {
 
 
   handleLogoChange = ({ fileList }) => {
-    setTimeout(() => {
-      this.setState({ fileList, uploading: true });
-    })
+      this.setState({ fileList});
   }
 
   render() {
-    const { submitting ,data} = this.props;
-    const {
-      form: { getFieldDecorator, getFieldValue },
-    } = this.props;
-
+   
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -97,8 +104,11 @@ class BasicForms extends PureComponent {
         sm: { span: 10, offset: 7 },
       },
     };
-
-    const { previewVisible, previewImage, fileList, uploading } = this.state;
+    const { submitting, data } = this.props;
+    const {
+      form: { getFieldDecorator, getFieldValue },
+    } = this.props;
+    const { previewVisible, previewImage,fileList} = this.state;
     const uploadButton = (
       <div>
         <Icon type="plus" />
@@ -114,7 +124,7 @@ class BasicForms extends PureComponent {
         <Card bordered={false}>
           <Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 8 }}>
             <FormItem {...formItemLayout} label='甲方名称'>
-              {getFieldDecorator('name', { rules: [{ required: true, message: '请输入甲方名称' }], })(<Input placeholder='请输入甲方名称' />)}
+              {getFieldDecorator('name', { initialValue: data.name || '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input placeholder='请输入甲方名称' />)}
             </FormItem>
             <FormItem {...formItemLayout} label='甲方logo'>
               {getFieldDecorator('logolist', { rules: [{ required: true, message: '请上传甲方logo' }], })(
@@ -122,7 +132,7 @@ class BasicForms extends PureComponent {
                   action="http://up.qiniu.com"
                   listType="picture-card"
                   fileList={fileList}
-                  data={data}
+                  data={{token:data.token}}
                   onPreview={this.handleLogoPreview}
                   onChange={this.handleLogoChange}
                 >
@@ -131,19 +141,13 @@ class BasicForms extends PureComponent {
               )}
 
             </FormItem>
-            <FormItem {...formItemLayout} label='甲方链接'>
-              {getFieldDecorator('url', { rules: [{ required: true, message: '请输入甲方链接' }], })(<Input placeholder='请输入甲方链接' />)}
-            </FormItem>
-            <FormItem {...formItemLayout} label='短链接'>
-              {getFieldDecorator('short_url')(<Input disabled placeholder='短链接自动生成' />)}
-            </FormItem>
-            <FormItem {...formItemLayout} label='甲方描述'>{getFieldDecorator('desc', { rules: [{ required: true, message: '请输入甲方描述' }], })(<Input placeholder='请输入甲方描述' />)}</FormItem>
-            <FormItem {...formItemLayout} label='其他1'>  {getFieldDecorator('str1')(<Input placeholder='请输入其他1' />)}</FormItem>
-            <FormItem {...formItemLayout} label='其他2'>{getFieldDecorator('str2')(<Input placeholder='请输入其他2' />)}</FormItem>
-            <FormItem {...formItemLayout} label='其他3'>{getFieldDecorator('str3')(<Input placeholder='请输入其他3' />)}</FormItem>
-            <FormItem {...formItemLayout} label='其他4'>  {getFieldDecorator('str4')(<Input placeholder='请输入其他4' />)}</FormItem>
-
-
+            <FormItem {...formItemLayout} label='甲方链接'>{getFieldDecorator('url', { initialValue: data.url || '', rules: [{ required: true, message: '请输入甲方链接' }], })(<Input placeholder='请输入甲方链接' />)}</FormItem>
+            <FormItem {...formItemLayout} label='短链接'>{getFieldDecorator('url_short', { initialValue: data.url_short || '' })(<Input disabled placeholder='短链接自动生成' />)}</FormItem>
+            <FormItem {...formItemLayout} label='甲方描述'>{getFieldDecorator('desc', { initialValue: data.desc || '', rules: [{ required: true, message: '请输入甲方描述' }], })(<Input placeholder='请输入甲方描述' />)}</FormItem>
+            <FormItem {...formItemLayout} label='其他1'>  {getFieldDecorator('str1', { initialValue: data.str1 || '' })(<Input placeholder='请输入其他1' />)}</FormItem>
+            <FormItem {...formItemLayout} label='其他2'>{getFieldDecorator('str2', { initialValue: data.str2 || '' })(<Input placeholder='请输入其他2' />)}</FormItem>
+            <FormItem {...formItemLayout} label='其他3'>{getFieldDecorator('str3', { initialValue: data.str3 || '' })(<Input placeholder='请输入其他3' />)}</FormItem>
+            <FormItem {...formItemLayout} label='其他4'>  {getFieldDecorator('str4', { initialValue: data.str4 || '' })(<Input placeholder='请输入其他4' />)}</FormItem>
             <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
               <Button type="primary" htmlType="submit" loading={submitting}>
                 保存

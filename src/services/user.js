@@ -30,6 +30,10 @@ export async function jiafangcreate(params) {
   return request(`${baseUrl}/jiafang/create`, { method: 'POST', body: params });
 }
 
+export async function jiafangdetail(params) {
+  return request(`${baseUrl}/jiafang/detail`, { method: 'POST', body: params });
+}
+
 export async function userlogin(params) {
   return request(`${baseUrl}/d/user/dsignin`, { method: 'POST', body: params });
 }
