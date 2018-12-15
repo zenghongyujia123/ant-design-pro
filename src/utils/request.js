@@ -94,7 +94,7 @@ export default function request(url, option) {
         ...newOptions.headers,
         top_session: localStorage.getItem('top_session'),
       };
-      newOptions.body = JSON.stringify(newOptions.body);
+      newOptions.body = JSON.stringify({...newOptions.body,top_session: localStorage.getItem('top_session')});
     } else {
       // newOptions.body is FormData
       newOptions.headers = {
