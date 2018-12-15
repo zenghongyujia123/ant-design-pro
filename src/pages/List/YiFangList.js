@@ -64,7 +64,7 @@ class TableList extends PureComponent {
     },
     {
       title: '落地页链接',
-      dataIndex: 'url',
+      dataIndex: 'url_short',
     },
     // {
     //   title: '操作',
