@@ -114,6 +114,10 @@ class TableList extends PureComponent {
       },
     },
     {
+      title: '乙方',
+      dataIndex: 'parent',
+    },
+    {
       title: '操作',
       render: (text, record) => (
         <Fragment>
