@@ -20,6 +20,7 @@ export default {
   'menu.list.ordertable': '订单列表',
   'menu.list.yifangtable': '乙方列表',
   'menu.list.jiafangtable': '甲方列表',
+  'menu.list.settingdetail': '设置',
   'menu.list.basiclist': '标准列表',
   'menu.list.cardlist': '卡片列表',
   'menu.list.searchlist': '搜索列表',

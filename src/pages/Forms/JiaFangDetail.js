@@ -26,7 +26,7 @@ const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
 @connect(({ loading, form }) => ({
-  fileList:form.fileList,
+  fileList: form.fileList,
   data: form.data,
   submitting: loading.effects['form/jiafangcreate'],
 }))
@@ -38,7 +38,7 @@ class BasicForms extends PureComponent {
     previewVisible: false,
     previewImage: '',
     data: {},
-    fileList:this.props.fileList,
+    fileList: this.props.fileList,
   };
 
   componentDidMount() {
@@ -49,8 +49,8 @@ class BasicForms extends PureComponent {
         payload: {
           jiafang_id: this.props.location.query._id
         },
-        callback:(fileList)=>{
-          this.setState({fileList})
+        callback: (fileList) => {
+          this.setState({ fileList })
         }
       });
     }
@@ -65,14 +65,17 @@ class BasicForms extends PureComponent {
     const { dispatch, form } = this.props;
     e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
-      values.logolist.fileList.forEach(logo => {
-        values.logo = `http://pjgg8ntmh.bkt.clouddn.com/${logo.response.key}`;
-      })
-      delete values.logolist
       if (!err) {
+        if (values.logolist) {
+          values.logolist.fileList.forEach(logo => {
+            values.logo = `http://pjgg8ntmh.bkt.clouddn.com/${logo.response.key}`;
+          })
+          delete values.logolist
+        }
+
         dispatch({
           type: 'form/jiafangcreate',
-          payload: values,
+          payload: { ...values, jiafang_id: this.props.location.query._id },
         });
       }
     });
@@ -81,11 +84,11 @@ class BasicForms extends PureComponent {
 
 
   handleLogoChange = ({ fileList }) => {
-      this.setState({ fileList});
+    this.setState({ fileList });
   }
 
   render() {
-   
+
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -108,7 +111,7 @@ class BasicForms extends PureComponent {
     const {
       form: { getFieldDecorator, getFieldValue },
     } = this.props;
-    const { previewVisible, previewImage,fileList} = this.state;
+    const { previewVisible, previewImage, fileList } = this.state;
     const uploadButton = (
       <div>
         <Icon type="plus" />
@@ -132,7 +135,7 @@ class BasicForms extends PureComponent {
                   action="http://up.qiniu.com"
                   listType="picture-card"
                   fileList={fileList}
-                  data={{token:data.token}}
+                  data={{ token: data.token }}
                   onPreview={this.handleLogoPreview}
                   onChange={this.handleLogoChange}
                 >

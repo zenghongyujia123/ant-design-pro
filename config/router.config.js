@@ -78,6 +78,11 @@ export default [
         name: 'list.jiafangtable',
         component: './List/JiaFangList',
       },
+      {
+        path: '/list/setting-detail',
+        name: 'list.settingdetail',
+        component: './List/SettingDetail',
+      },
     ]
   }
 ]

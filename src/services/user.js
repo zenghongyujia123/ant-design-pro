@@ -42,3 +42,10 @@ export async function uptoken(params) {
   return request(`${baseUrl}/qiniu/uptoken`, { method: 'GET', body: params });
 }
 
+export async function get_setting(params) {
+  return request(`${baseUrl}/setting/get`, { method: 'POST', body: params });
+}
+
+export async function set_setting(params) {
+  return request(`${baseUrl}/setting/set`, { method: 'POST', body: params });
+}
