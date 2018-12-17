@@ -59,6 +59,10 @@ class TableList extends PureComponent {
       dataIndex: 'amount',
     },
     {
+      title: '用户',
+      dataIndex: 'username',
+    },
+    {
       title: '类型',
       dataIndex: 'productname',
     },
