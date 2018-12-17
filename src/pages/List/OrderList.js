@@ -76,6 +76,10 @@ class TableList extends PureComponent {
       dataIndex: 'status',
     },
     {
+      title: '错误',
+      dataIndex: 'errormsg',
+    },
+    {
       title: '操作',
       render: (text, record) => (
         <Fragment>

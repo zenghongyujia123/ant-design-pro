@@ -81,8 +81,6 @@ class BasicForms extends PureComponent {
     });
   };
 
-
-
   handleLogoChange = ({ fileList }) => {
     this.setState({ fileList });
   }

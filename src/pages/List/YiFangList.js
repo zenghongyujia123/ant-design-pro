@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
+import { Link } from 'dva/router';
 import {
   Row,
   Col,
@@ -50,33 +51,28 @@ class TableList extends PureComponent {
   };
 
   columns = [
+    { title: '账号', dataIndex: 'username', },
+    { title: '公司', dataIndex: 'nickname', },
+    { title: '注册量', dataIndex: 'count', },
+    { title: '今日注册量', dataIndex: 'today_count' },
+    { title: '密码', dataIndex: 'password' },
+    { title: '落地页链接', dataIndex: 'url_short' },
+    { title: '姓名', dataIndex: 'lianxiren_name' },
+    { title: '手机号', dataIndex: 'lianxiren_phone' },
+    { title: '微信', dataIndex: 'lianxiren_weixin' },
+    { title: '其他1', dataIndex: 'str1' },
+    { title: '其他2', dataIndex: 'str2' },
+    { title: '其他3', dataIndex: 'str3' },
+    { title: '其他4', dataIndex: 'str4' },
     {
-      title: '账号',
-      dataIndex: 'username',
+      title: '操作',
+      dataIndex: '_id',
+      render: (_id, record) => (
+        <Fragment>
+          <Link to={{ pathname: '/form/yifang-detail', query: { _id: _id } }}>详情</Link>
+        </Fragment>
+      ),
     },
-    {
-      title: '公司',
-      dataIndex: 'nickname',
-    },
-    {
-      title: '注册量',
-      dataIndex: 'count',
-    },{
-      title: '密码',
-      dataIndex: 'password',
-    },
-    {
-      title: '落地页链接',
-      dataIndex: 'url_short',
-    },
-    // {
-    //   title: '操作',
-    //   render: (text, record) => (
-    //     <Fragment>
-    //       <a href="/form/yifang-detail">详情</a>
-    //     </Fragment>
-    //   ),
-    // },
   ];
 
   componentDidMount() {
