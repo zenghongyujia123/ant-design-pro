@@ -191,14 +191,29 @@ class TableList extends PureComponent {
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-          <Col md={6} sm={24}>
+          <Col md={4} sm={24}>
             <FormItem label="乙方账号">
               {getFieldDecorator('parent')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
 
-
-          <Col md={6} sm={24}>
+          <Col md={4} sm={24}>
+            <FormItem label="用户名">
+              {getFieldDecorator('username')(<Input placeholder="请输入" />)}
+            </FormItem>
+          </Col>
+          <Col md={4} sm={24}>
+            <FormItem label="银行绑定">
+              {getFieldDecorator('is_bank')(
+                <Select placeholder="银行绑定" style={{ width: '100%' }}>
+                  <Option value="">默认</Option>
+                  <Option value="false">否</Option>
+                  <Option value="true">是</Option>
+                </Select>
+              )}
+            </FormItem>
+          </Col>
+          <Col md={4} sm={24}>
             <FormItem label="首次付费">
               {getFieldDecorator('is_evaluate_report')(
                 <Select placeholder="首次付费" style={{ width: '100%' }}>
@@ -209,7 +224,7 @@ class TableList extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col md={6} sm={24}>
+          <Col md={4} sm={24}>
             <FormItem label="二次付费">
               {getFieldDecorator('is_smart_recommend')(
                 <Select placeholder="二次付费" style={{ width: '100%' }}>
@@ -220,7 +235,7 @@ class TableList extends PureComponent {
               )}
             </FormItem>
           </Col>
-          <Col md={6} sm={24}>
+          <Col md={4} sm={24}>
             <FormItem label="创建日期">
               {getFieldDecorator('created_date')(
                 <DatePicker format="YYYY/MM/DD" style={{ width: '100%' }} placeholder="请输入更新日期" />
