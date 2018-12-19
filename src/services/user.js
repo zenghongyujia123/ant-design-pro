@@ -22,7 +22,6 @@ export async function yifanglist(params) {
 export async function yifangcreate(params) {
   return request(`${baseUrl}/yifang/create`, { method: 'POST', body: params });
 }
-
 export async function jiafanglist(params) {
   return request(`${baseUrl}/jiafang/list`, { method: 'POST', body: params });
 }
