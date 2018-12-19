@@ -55,6 +55,8 @@ class TableList extends PureComponent {
     { title: '公司', dataIndex: 'nickname', },
     { title: '注册量', dataIndex: 'count', },
     { title: '今日注册量', dataIndex: 'today_count' },
+    { title: '今日首付', dataIndex: 'today_first_pay_count' },
+    { title: '今日二付', dataIndex: 'today_second_pay_count' },
     { title: '密码', dataIndex: 'password' },
     { title: '落地页链接', dataIndex: 'url_short' },
     { title: '姓名', dataIndex: 'lianxiren_name' },
