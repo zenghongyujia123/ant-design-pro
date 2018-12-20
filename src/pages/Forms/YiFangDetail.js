@@ -87,6 +87,8 @@ class BasicForms extends PureComponent {
             <FormItem {...formItemLayout} label='用户名'>{getFieldDecorator('username', { initialValue: data.username || '', rules: [{ required: true, message: '请输入用户名' }], })(<Input placeholder='请输入用户名' />)}</FormItem>
             <FormItem {...formItemLayout} label='密码'>{getFieldDecorator('password', { initialValue: data.password || '', rules: [{ required: true, message: '请输入密码' }], })(<Input placeholder='请输入密码' />)}</FormItem>
             <FormItem {...formItemLayout} label='公司名'>{getFieldDecorator('nickname', { initialValue: data.nickname || '', rules: [{ required: true, message: '请输入公司名' }], })(<Input placeholder='请输入公司名' />)}</FormItem>
+            <FormItem {...formItemLayout} label='推广链接'>{getFieldDecorator('url_short', { initialValue: data.url_short || '' })(<Input disabled />)}</FormItem>
+            
             <FormItem {...formItemLayout} label='联系人'>{getFieldDecorator('lianxiren_name', { initialValue: data.lianxiren_name || '', })(<Input />)}</FormItem>
             <FormItem {...formItemLayout} label='联系电话'>{getFieldDecorator('lianxiren_phone', { initialValue: data.lianxiren_phone || '', })(<Input />)}</FormItem>
             <FormItem {...formItemLayout} label='联系微信'>{getFieldDecorator('lianxiren_weixin', { initialValue: data.lianxiren_weixin || '', })(<Input />)}</FormItem>
