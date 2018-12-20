@@ -68,6 +68,7 @@ class TableList extends PureComponent {
     { title: '昨天二付', dataIndex: 'yestoday_second_pay_count' },
 
     { title: '今日注册量', dataIndex: 'today_count' },
+    { title: '今日进app', dataIndex: 'today_app_count' },
     { title: '今日首付', dataIndex: 'today_first_pay_count' },
     {
       title: '今日首转', dataIndex: 'today_first_zhuanhua', render: (_id, record) => (
