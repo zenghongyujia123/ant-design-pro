@@ -68,24 +68,24 @@ class TableList extends PureComponent {
         );
       },
     },
-    {
-      title: '紧急联系人',
-      dataIndex: 'is_jinji_contract',
-      render(val) {
-        return (
-          <Badge status={statusMap[val === true ? 1 : 0]} text={status[val === true ? 1 : 0]} />
-        );
-      },
-    },
-    {
-      title: '个人资料',
-      dataIndex: 'is_geren_ziliao',
-      render(val) {
-        return (
-          <Badge status={statusMap[val === true ? 1 : 0]} text={status[val === true ? 1 : 0]} />
-        );
-      },
-    },
+    // {
+    //   title: '紧急联系人',
+    //   dataIndex: 'is_jinji_contract',
+    //   render(val) {
+    //     return (
+    //       <Badge status={statusMap[val === true ? 1 : 0]} text={status[val === true ? 1 : 0]} />
+    //     );
+    //   },
+    // },
+    // {
+    //   title: '个人资料',
+    //   dataIndex: 'is_geren_ziliao',
+    //   render(val) {
+    //     return (
+    //       <Badge status={statusMap[val === true ? 1 : 0]} text={status[val === true ? 1 : 0]} />
+    //     );
+    //   },
+    // },
     {
       title: '银行绑定',
       dataIndex: 'is_bank',
@@ -116,6 +116,15 @@ class TableList extends PureComponent {
     {
       title: '乙方',
       dataIndex: 'parent',
+    },
+    {
+      title: '是否登陆',
+      dataIndex: 'app_name',
+      render(val) {
+        return (
+          <Badge status={statusMap[val ? 1 : 0]} text={status[val ? 1 : 0]} />
+        );
+      },
     },
     {
       title: '操作',
