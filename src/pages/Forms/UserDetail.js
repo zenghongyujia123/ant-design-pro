@@ -45,21 +45,15 @@ class BasicForms extends PureComponent {
     const { dispatch } = this.props;
     if (this.props.location.query._id) {
       dispatch({
-        type: 'form/jiafangdetail',
+        type: 'form/userdetail',
         payload: {
-          jiafang_id: this.props.location.query._id
+          user_id: this.props.location.query._id
         },
         callback: (fileList) => {
           this.setState({ fileList })
         }
       });
     }
-
-
-    dispatch({
-      type: 'form/uptoken',
-    });
-
   }
   handleSubmit = e => {
     const { dispatch, form } = this.props;
@@ -67,10 +61,10 @@ class BasicForms extends PureComponent {
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
 
-        dispatch({
-          type: 'form/jiafangcreate',
-          payload: { ...values, jiafang_id: this.props.location.query._id },
-        });
+        // dispatch({
+        //   type: 'form/jiafangcreate',
+        //   payload: { ...values, jiafang_id: this.props.location.query._id },
+        // });
       }
     });
   };

@@ -54,6 +54,11 @@ export default [
             name: 'jiafangdetail',
             component: './Forms/JiaFangDetail',
           },
+          {
+            path: '/form/user-detail',
+            name: 'userdetail',
+            component: './Forms/UserDetail',
+          },
         ],
       },
       {

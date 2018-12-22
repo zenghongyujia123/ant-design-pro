@@ -1,7 +1,7 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
 import { fakeSubmitForm } from '@/services/api';
-import { yifangcreate, jiafangcreate, uptoken, yifangdetail,jiafangdetail, get_setting, set_setting } from '@/services/user';
+import { yifangcreate, jiafangcreate, uptoken, yifangdetail, jiafangdetail, get_setting, set_setting, userdetail } from '@/services/user';
 
 export default {
   namespace: 'form',
@@ -14,6 +14,8 @@ export default {
   },
 
   effects: {
+
+
     *yifangcreate({ payload }, { call, put }) {
       let res = yield call(yifangcreate, payload);
       if (res.err_msg)
@@ -23,7 +25,7 @@ export default {
         yield put(routerRedux.push('/list/yifang-list', {}));
       }
     },
-   
+
     *jiafangcreate({ payload }, { call, put }) {
       let res = yield call(jiafangcreate, payload);
       if (res.err_msg)
@@ -51,8 +53,21 @@ export default {
         });
       }
     },
+
+
     *yifangdetail({ payload, callback }, { call, put }) {
       let res = yield call(yifangdetail, payload);
+      if (res.err_msg)
+        message.error(res.err_msg);
+      else {
+        yield put({
+          type: 'save',
+          payload: res,
+        });
+      }
+    },
+    *userdetail({ payload, callback }, { call, put }) {
+      let res = yield call(userdetail, payload);
       if (res.err_msg)
         message.error(res.err_msg);
       else {

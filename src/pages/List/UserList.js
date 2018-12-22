@@ -1,6 +1,8 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
+import { Link } from 'dva/router';
+
 import {
   Row,
   Col,
@@ -128,9 +130,10 @@ class TableList extends PureComponent {
     },
     {
       title: '操作',
-      render: (text, record) => (
+      dataIndex: '_id',
+      render: (_id, record) => (
         <Fragment>
-          <a href="">详情</a>
+          <Link to={{ pathname: '/form/user-detail', query: { _id: _id } }}>详情</Link>
         </Fragment>
       ),
     },

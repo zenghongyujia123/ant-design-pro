@@ -8,6 +8,7 @@ export default {
   'menu.form.basicform': '基础表单',
   'menu.form.yifangdetail': '乙方详情',
   'menu.form.jiafangdetail': '甲方详情',
+  'menu.form.userdetail': '用户详情',
   
   'menu.form.stepform': '分步表单',
   'menu.form.stepform.info': '分步表单（填写转账信息）',
