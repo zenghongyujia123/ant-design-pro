@@ -60,7 +60,7 @@ class TableList extends PureComponent {
     { title: '昨天注册量', dataIndex: 'yestoday_count' },
     { title: '昨天首付', dataIndex: 'yestoday_first_pay_count' },
     {
-      title: '昨天首转', dataIndex: 'today_first_zhuanhua', render: (_id, record) => (
+      title: '昨天首转', dataIndex: 'yestoday_first_zhuanhua', render: (_id, record) => (
         <span>{record.yestoday_count == 0 ? 0 : (100*(record.yestoday_first_pay_count / record.yestoday_count)).toFixed(2)}%</span>
       ),
     },

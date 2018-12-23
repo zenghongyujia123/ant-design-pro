@@ -55,45 +55,63 @@ class TableList extends PureComponent {
     {
       title: '甲方名称',
       dataIndex: 'name',
+      width: 150,
     },
     {
       title: '描述',
       dataIndex: 'desc',
+      width: 150,
     },
     {
       title: 'logo',
       dataIndex: 'logo',
+      width: 150,
       render: (logo) => {
         return <Avatar style={{ borderRadius: 0, width: 50, height: 50 }} src={logo} />
       }
     },
     {
+      title: '退款示列',
+      dataIndex: 'failed_img',
+      width: 150,
+      render: (failed_img) => {
+        return <Avatar style={{ borderRadius: 0, width: 50, height: 50 }} src={failed_img} />
+      }
+    },
+    {
       title: '链接',
       dataIndex: 'url',
+      width: 150,
     },
     {
       title: '短链接',
       dataIndex: 'url_short',
+      width: 150,
     },
     {
       title: '其他1',
       dataIndex: 'str1',
+      width: 150,
     },
     {
       title: '其他2',
       dataIndex: 'str2',
+      width: 150,
     },
     {
       title: '其他3',
       dataIndex: 'str3',
+      width: 150,
     },
     {
       title: '其他4',
       dataIndex: 'str4',
+      width: 150,
     },
     {
       title: '操作',
       dataIndex: '_id',
+      width: 150,
       render: (_id, record) => (
         <Fragment>
           <Link to={{ pathname: '/form/jiafang-detail', query: { _id: _id } }}>详情</Link>

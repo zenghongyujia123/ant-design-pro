@@ -114,6 +114,7 @@ class StandardTable extends PureComponent {
           dataSource={list}
           pagination={paginationProps}
           onChange={this.handleTableChange}
+          scroll={{ x: 1500 }}
           {...rest}
         />
       </div>

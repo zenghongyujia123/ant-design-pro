@@ -120,6 +120,9 @@ class BasicForms extends PureComponent {
           <Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 8 }}>
             <FormItem {...formItemLayout} label='甲方名称'>{getFieldDecorator('name', { initialValue: data.name || '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input placeholder='请输入甲方名称' />)}</FormItem>
             <FormItem {...formItemLayout} label='甲方logo链接'>{getFieldDecorator('logo', { initialValue: data.logo || '', rules: [{ required: true, message: '请输入甲方logo链接' }], })(<Input placeholder='请输入甲方logo链接' />)}<img style={{width:'60px',height:'60px'}} src={ data.logo}></img></FormItem>
+            <FormItem {...formItemLayout} label='甲方退款失败示列图'>{getFieldDecorator('failed_img', { initialValue: data.failed_img || '', rules: [{ required: true, message: '请输入甲方退款失败示列图' }], })(<Input placeholder='请输入甲方退款失败示列图' />)}<img style={{width:'60px',height:'60px'}} src={ data.failed_img}></img></FormItem>
+            
+
             <FormItem {...formItemLayout} label='甲方链接'>{getFieldDecorator('url', { initialValue: data.url || '', rules: [{ required: true, message: '请输入甲方链接' }], })(<Input placeholder='请输入甲方链接' />)}</FormItem>
             <FormItem {...formItemLayout} label='短链接'>{getFieldDecorator('url_short', { initialValue: data.url_short || '' })(<Input disabled placeholder='短链接自动生成' />)}</FormItem>
             <FormItem {...formItemLayout} label='甲方描述'>{getFieldDecorator('desc', { initialValue: data.desc || '', rules: [{ required: true, message: '请输入甲方描述' }], })(<Input placeholder='请输入甲方描述' />)}</FormItem>
