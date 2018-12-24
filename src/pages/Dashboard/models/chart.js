@@ -12,7 +12,7 @@ export default {
     salesData: [],
     searchData: [],
     offlineData: [],
-    offlineChartData: [],
+    offlineChartData: [{x:new Date().getTime(),y1:1}],
     salesTypeData: [],
     salesTypeDataOnline: [],
     salesTypeDataOffline: [],
@@ -42,7 +42,7 @@ export default {
         }
 
 
-        start = new Date(start.setMinutes(start.getMinutes() + 1));
+        start = new Date(start.setHours(start.getHours() + 1));
         let item = { x: start.getTime(), y1: 0 }
         let index = sorceArray.indexOf(start.getTime());
         if (index >= 0) {

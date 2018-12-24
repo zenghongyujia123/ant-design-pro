@@ -35,11 +35,11 @@ class TimelineChart extends React.Component {
         [...data].sort((a, b) => b.y2 - a.y2)[0].y2
       );
     }
-
+   
     const ds = new DataSet({
       state: {
-        start: data[0].x,
-        end: data[data.length - 1].x,
+        start: data[0]?data[0].x:0,
+        end: data[data.length - 1]? data[data.length - 1].x:0,
       },
     });
 
