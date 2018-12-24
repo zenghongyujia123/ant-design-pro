@@ -55,3 +55,9 @@ export async function get_setting(params) {
 export async function set_setting(params) {
   return request(`${baseUrl}/setting/set`, { method: 'POST', body: params });
 }
+
+export async function dashboard_pay(params) {
+  return request(`${baseUrl}/order/dashboard_pay`, { method: 'POST', body: params });
+}
+
+
