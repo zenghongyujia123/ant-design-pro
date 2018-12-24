@@ -58,7 +58,8 @@ class TableList extends PureComponent {
       ),
     },
     { title: '总注册量', dataIndex: 'count', },
-
+    
+    { title: '今日ip', dataIndex: 'today_ip' },
     { title: '今日注册量', dataIndex: 'today_count' },
     { title: '今日进app', dataIndex: 'today_app_count' },
     { title: '今日首付', dataIndex: 'today_first_pay_count' },
