@@ -52,30 +52,23 @@ class TableList extends PureComponent {
 
   columns = [
     { title: '账号', dataIndex: 'username', },
-    { title: '公司', dataIndex: 'nickname', render: (nickname, record) => (
-      <span>{(nickname||'').substr(0,5)}</span>
-    ),},
-    { title: '注册量', dataIndex: 'count', },
-
-    { title: '昨天注册量', dataIndex: 'yestoday_count' },
-    { title: '昨天首付', dataIndex: 'yestoday_first_pay_count' },
     {
-      title: '昨天首转', dataIndex: 'yestoday_first_zhuanhua', render: (_id, record) => (
-        <span>{record.yestoday_count == 0 ? 0 : (100*(record.yestoday_first_pay_count / record.yestoday_count)).toFixed(2)}%</span>
+      title: '公司', dataIndex: 'nickname', render: (nickname, record) => (
+        <span>{(nickname || '').substr(0, 5)}</span>
       ),
     },
-   
-    { title: '昨天二付', dataIndex: 'yestoday_second_pay_count' },
+    { title: '总注册量', dataIndex: 'count', },
 
     { title: '今日注册量', dataIndex: 'today_count' },
     { title: '今日进app', dataIndex: 'today_app_count' },
     { title: '今日首付', dataIndex: 'today_first_pay_count' },
-    {
-      title: '今日首转', dataIndex: 'today_first_zhuanhua', render: (_id, record) => (
-        <span>{record.today_count == 0 ? 0 : (100*(record.today_first_pay_count / record.today_count)).toFixed(2)}%</span>
-      ),
-    },
+    { title: '今日首转', dataIndex: 'today_first_zhuanhua', render: (_id, record) => (<span>{record.today_count == 0 ? 0 : (100 * (record.today_first_pay_count / record.today_count)).toFixed(2)}%</span>), },
     { title: '今日二付', dataIndex: 'today_second_pay_count' },
+
+    { title: '昨天注册量', dataIndex: 'yestoday_count' },
+    { title: '昨天首付', dataIndex: 'yestoday_first_pay_count' },
+    { title: '昨天首转', dataIndex: 'yestoday_first_zhuanhua', render: (_id, record) => (<span>{record.yestoday_count == 0 ? 0 : (100 * (record.yestoday_first_pay_count / record.yestoday_count)).toFixed(2)}%</span>) },
+    { title: '昨天二付', dataIndex: 'yestoday_second_pay_count' },
     {
       title: '操作',
       dataIndex: '_id',
