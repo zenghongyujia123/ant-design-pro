@@ -36,6 +36,13 @@ const getValue = obj =>
     .join(',');
 const statusMap = ['error', 'success'];
 const status = ['否', '是'];
+const refundDic = {
+  'none': '未申请',
+  'submit': '已提交',
+  'unpass': '未通过',
+  'unpay': '待打款',
+  'pay': '已打款',
+}
 
 @Form.create()
 /* eslint react/no-multi-comp:0 */
@@ -70,24 +77,6 @@ class TableList extends PureComponent {
         );
       },
     },
-    // {
-    //   title: '紧急联系人',
-    //   dataIndex: 'is_jinji_contract',
-    //   render(val) {
-    //     return (
-    //       <Badge status={statusMap[val === true ? 1 : 0]} text={status[val === true ? 1 : 0]} />
-    //     );
-    //   },
-    // },
-    // {
-    //   title: '个人资料',
-    //   dataIndex: 'is_geren_ziliao',
-    //   render(val) {
-    //     return (
-    //       <Badge status={statusMap[val === true ? 1 : 0]} text={status[val === true ? 1 : 0]} />
-    //     );
-    //   },
-    // },
     {
       title: '银行绑定',
       dataIndex: 'is_bank',
@@ -125,6 +114,24 @@ class TableList extends PureComponent {
       render(val) {
         return (
           <Badge status={statusMap[val ? 1 : 0]} text={status[val ? 1 : 0]} />
+        );
+      },
+    },
+    {
+      title: '首次退款状态',
+      dataIndex: 'first_refund_status',
+      render(val) {
+        return (
+          <Badge status={statusMap[0]} text={refundDic[val]} />
+        );
+      },
+    },
+    {
+      title: '二次退款状态',
+      dataIndex: 'refund_status',
+      render(val) {
+        return (
+          <Badge status={statusMap[0]} text={refundDic[val]} />
         );
       },
     },
@@ -251,6 +258,34 @@ class TableList extends PureComponent {
             <FormItem label="创建日期">
               {getFieldDecorator('created_date')(
                 <DatePicker format="YYYY/MM/DD" style={{ width: '100%' }} placeholder="请输入更新日期" />
+              )}
+            </FormItem>
+          </Col>
+        </Row>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+          <Col md={4} sm={24}>
+            <FormItem label="首次退款">
+              {getFieldDecorator('first_refund_status')(
+                <Select placeholder="首次退款" style={{ width: '100%' }}>
+                  <Option value="">默认</Option>
+                  <Option value="submit">已申请</Option>
+                  <Option value="unpass">未通过</Option>
+                  <Option value="unpay">待打款</Option>
+                  <Option value="pay">已付款</Option>
+                </Select>
+              )}
+            </FormItem>
+          </Col>
+          <Col md={4} sm={24}>
+            <FormItem label="二次退款">
+              {getFieldDecorator('refund_status')(
+                <Select placeholder="二次退款" style={{ width: '100%' }}>
+                  <Option value="">默认</Option>
+                  <Option value="submit">已申请</Option>
+                  <Option value="unpass">未通过</Option>
+                  <Option value="unpay">待打款</Option>
+                  <Option value="pay">已付款</Option>
+                </Select>
               )}
             </FormItem>
           </Col>
