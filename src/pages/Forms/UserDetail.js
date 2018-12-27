@@ -72,56 +72,87 @@ class BasicForms extends PureComponent {
 
 
   handleRefundChange = (e, index, status, refund_list) => {
-    const { dispatch, form } = this.props;
+    const { dispatch, form, data } = this.props;
+    if (data.refund_status === 'pay') {
+      return;
+    }
     e.preventDefault();
+
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        refund_list[index].status = status;
-        refund_list[index].refund_reason = values[`refund_reason${index}`];
-        let refund_status = 'unpay'
-        refund_list.forEach(item => {
-          if (item.status != 'pass') {
-            refund_status = 'unpass';
-          }
-        });
+        if (status !== 'pay') {
+          refund_list[index].status = status;
+          refund_list[index].refund_reason = values[`refund_reason${index}`];
+          let refund_status = 'unpay'
+          refund_list.forEach(item => {
+            if (item.status != 'pass') {
+              refund_status = 'unpass';
+            }
+          });
 
 
 
-        console.log(refund_list);
-        dispatch({
-          type: 'form/update_auth_info_by_admin',
-          payload: {
-            refund_list,
-            refund_status,
-            refund_time: moment().format('YYYY-MM-DD HH:mm:ss'),
-            user_id: this.props.location.query._id
-          },
-        });
+          console.log(refund_list);
+          dispatch({
+            type: 'form/update_auth_info_by_admin',
+            payload: {
+              refund_list,
+              refund_status,
+              refund_time: moment().format('YYYY-MM-DD HH:mm:ss'),
+              user_id: this.props.location.query._id
+            },
+          });
+        }
+        else {
+          dispatch({
+            type: 'form/update_auth_info_by_admin',
+            payload: {
+              refund_status: 'pay',
+              refund_time: moment().format('YYYY-MM-DD HH:mm:ss'),
+              user_id: this.props.location.query._id
+            },
+          });
+        }
       }
     });
   }
   handleFirstRefundChange = (e, index, status, first_refund_list) => {
-    const { dispatch, form } = this.props;
+    const { dispatch, form, data } = this.props;
+    if (data.first_refund_status === 'pay') {
+      return;
+    }
     e.preventDefault();
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        first_refund_list[index].status = status;
-        first_refund_list[index].refund_reason = values[`first_refund_reason${index}`];
-        let first_refund_status = 'unpay'
-        first_refund_list.forEach(item => {
-          if (item.status != 'pass') {
-            first_refund_status = 'unpass';
-          }
-        });
-        dispatch({
-          type: 'form/update_auth_info_by_admin',
-          payload: {
-            first_refund_list,
-            first_refund_status,
-            first_refund_time: moment().format('YYYY-MM-DD HH:mm:ss'),
-            user_id: this.props.location.query._id
-          },
-        });
+        if (status !== 'pay') {
+          first_refund_list[index].status = status;
+          first_refund_list[index].refund_reason = values[`first_refund_reason${index}`];
+          let first_refund_status = 'unpay'
+          first_refund_list.forEach(item => {
+            if (item.status != 'pass') {
+              first_refund_status = 'unpass';
+            }
+          });
+          dispatch({
+            type: 'form/update_auth_info_by_admin',
+            payload: {
+              first_refund_list,
+              first_refund_status,
+              first_refund_time: moment().format('YYYY-MM-DD HH:mm:ss'),
+              user_id: this.props.location.query._id
+            },
+          });
+        }
+        else {
+          dispatch({
+            type: 'form/update_auth_info_by_admin',
+            payload: {
+              first_refund_status: 'pay',
+              first_refund_time: moment().format('YYYY-MM-DD HH:mm:ss'),
+              user_id: this.props.location.query._id
+            },
+          });
+        }
       }
     });
   }
@@ -155,8 +186,7 @@ class BasicForms extends PureComponent {
 
     return (
       <PageHeaderWrapper
-        title='编辑甲方'
-        content='名字不能重复'
+        title='用户详情'
       >
         <Card bordered={false}>
           <Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 8 }}>
@@ -210,11 +240,10 @@ class BasicForms extends PureComponent {
             </FormItem>
             <Divider>首次次退款申请相关 （总状态：{data.first_refund_status}）(提交时间：{moment(data.first_refund_time).format('YYYY-MM-DD HH:mm:ss')})</Divider>
             {
-
               data.first_refund_list && data.first_refund_list.length > 0 && data.first_refund_list.map((first_refund, index) => {
                 return <FormItem key={first_refund.jiafang_id} {...formItemLayout} label={`${first_refund.name}`}>
                   <img style={{ width: '60px', height: '60px', marginRight: '10px' }} src={first_refund.logo}></img>
-                  <img style={{ width: '60px', height: '60px', marginRight: '10px' }} src={first_refund.refund_image}></img>
+                  <img style={{ width: '60px', height: '60px', marginRight: '10px' }} onClick={e => window.open(first_refund.refund_image)} src={first_refund.refund_image}></img>
                   {/* submit,pass,unpass */}
                   （当前状态图片状态：{first_refund.status || 'submit'}）
                   <Button type="primary" style={{ marginRight: '10px' }} loading={submitting} onClick={e => { this.handleFirstRefundChange(e, index, 'pass', data.first_refund_list) }}>
@@ -223,15 +252,18 @@ class BasicForms extends PureComponent {
                   <Button type="danger" loading={submitting} onClick={e => { this.handleFirstRefundChange(e, index, 'unpass', data.first_refund_list) }}>
                     不通过
                   </Button>
-                  {/* <Input defaultValue={refund.reason || ''} placeholder='不通过原因' onChange={e => this.refundOnChange(e, data.refund_list[index])} /> */}
-
                   {getFieldDecorator(`first_refund_reason${index}`, { initialValue: first_refund.refund_reason || '' })(<Input placeholder='无' />)}
                 </FormItem>
-                //  <FormItem {...formItemLayout} label='甲方logo链接'>
-                //   {getFieldDecorator(refund.jiafang_id, { initialValue: refund.logo || '' })()}
-                // </FormItem>
               })
             }
+
+            <FormItem {...formItemLayout} label='谨慎点击首次付款'>{
+              data.first_refund_status === 'unpay' &&
+              <Button type="primary" loading={submitting} onClick={e => { this.handleFirstRefundChange(e, 0, 'pay', data.first_refund_list) }}>
+                设为已打款
+             </Button>
+            }
+            </FormItem>
             <Divider />
 
             <Divider>二次退款申请相关 （总状态：{data.refund_status}）(提交时间：{moment(data.refund_time).format('YYYY-MM-DD HH:mm:ss')})</Divider>
@@ -258,6 +290,13 @@ class BasicForms extends PureComponent {
                 // </FormItem>
               })
             }
+            <FormItem {...formItemLayout} label='谨慎点击二次付款'>{
+              data.refund_status === 'unpay' &&
+              <Button type="primary" loading={submitting} onClick={e => { this.handleRefundChange(e, 0, 'pay', data.refund_list) }}>
+                设为已打款
+             </Button>
+            }
+            </FormItem>
             <Divider />
 
             refund_status
