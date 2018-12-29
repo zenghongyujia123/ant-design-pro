@@ -192,6 +192,9 @@ class BasicForms extends PureComponent {
           <Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 8 }}>
             <FormItem {...formItemLayout} label='用户名'>{getFieldDecorator('username', { initialValue: data.username || '' })(<Input disabled placeholder='无' />)}</FormItem>
             <FormItem {...formItemLayout} label='注册时间'>{getFieldDecorator('created', { initialValue: moment(data.created).format('YYYY-MM-DD HH:mm:ss') || '' })(<Input disabled placeholder='无' />)}</FormItem>
+            <FormItem {...formItemLayout} label='银行卡用户名'>{getFieldDecorator('bank_username', { initialValue: data.bank_username || '' })(<Input disabled placeholder='无' />)}</FormItem>
+            <FormItem {...formItemLayout} label='银行卡号'>{getFieldDecorator('bank_cardno', { initialValue: data.bank_cardno || '' })(<Input disabled placeholder='无' />)}</FormItem>
+            <FormItem {...formItemLayout} label='身份证号'>{getFieldDecorator('id_no', { initialValue: data.face_info ? data.face_info.id_no : '' })(<Input disabled placeholder='无' />)}</FormItem>
 
 
             <FormItem {...formItemLayout} label='乙方渠道'>{getFieldDecorator('parent', { initialValue: data.parent || '' })(<Input disabled placeholder='无' />)}</FormItem>
