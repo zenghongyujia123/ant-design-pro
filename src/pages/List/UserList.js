@@ -64,6 +64,10 @@ class TableList extends PureComponent {
       dataIndex: 'username',
     },
     {
+      title: 'app名称',
+      dataIndex: 'app_name',
+    },
+    {
       title: '时间',
       dataIndex: 'created',
       render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
