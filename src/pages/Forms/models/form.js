@@ -85,7 +85,7 @@ export default {
         message.error(res.err_msg);
       else {
         yield put({
-          type: 'save',
+          type: 'saveUserDetail',
           payload: res,
         });
       }
@@ -122,6 +122,11 @@ export default {
   },
 
   reducers: {
+    saveUserDetail(state, action) {
+      return {
+        data: {  ...action.payload },
+      };
+    },
     save(state, action) {
       return {
         ...state,
