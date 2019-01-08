@@ -246,7 +246,7 @@ class BasicForms extends PureComponent {
               data.first_refund_list && data.first_refund_list.length > 0 && data.first_refund_list.map((first_refund, index) => {
                 return <FormItem key={first_refund.jiafang_id} {...formItemLayout} label={`${first_refund.name}`}>
                   <img style={{ width: '60px', height: '60px', marginRight: '10px' }} src={first_refund.logo}></img>
-                  <img style={{ width: '60px', height: '60px', marginRight: '10px' }} onClick={e => window.open(first_refund.refund_image)} src={first_refund.refund_image}></img>
+                  <img style={{ width: '60px', height: '60px', marginRight: '10px' }} onClick={e => window.open(first_refund.refund_image.replace('pjgg8ntmh.bkt.clouddn.com','image.chaoqianwang.com'))} src={first_refund.refund_image.replace('pjgg8ntmh.bkt.clouddn.com','image.chaoqianwang.com')}></img>
                   {/* submit,pass,unpass */}
                   （当前状态图片状态：{first_refund.status || 'submit'}）
                   <Button type="primary" style={{ marginRight: '10px' }} loading={submitting} onClick={e => { this.handleFirstRefundChange(e, index, 'pass', data.first_refund_list) }}>
@@ -275,7 +275,7 @@ class BasicForms extends PureComponent {
               data.refund_list && data.refund_list.length > 0 && data.refund_list.map((refund, index) => {
                 return <FormItem key={refund.jiafang_id} {...formItemLayout} label={`${refund.name}`}>
                   <img style={{ width: '60px', height: '60px', marginRight: '10px' }} src={refund.logo}></img>
-                  <img style={{ width: '60px', height: '60px', marginRight: '10px' }} onClick={e => window.open(refund.refund_image)} src={refund.refund_image}></img>
+                  <img style={{ width: '60px', height: '60px', marginRight: '10px' }} onClick={e => window.open(refund.refund_image.replace('pjgg8ntmh.bkt.clouddn.com','image.chaoqianwang.com'))} src={refund.refund_image.replace('pjgg8ntmh.bkt.clouddn.com','image.chaoqianwang.com')}></img>
                   {/* submit,pass,unpass */}
                   （当前状态图片状态：{refund.status || 'submit'}）
                   <Button type="primary" style={{ marginRight: '10px' }} loading={submitting} onClick={e => { this.handleRefundChange(e, index, 'pass', data.refund_list) }}>
