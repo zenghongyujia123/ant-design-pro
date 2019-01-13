@@ -1,7 +1,20 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
 import { fakeSubmitForm } from '@/services/api';
-import { yifangcreate, jiafangcreate, update_auth_info_by_admin, uptoken, yifangdetail, jiafangdetail, get_setting, set_setting, userdetail } from '@/services/user';
+import {
+  userorder,
+  yifangcreate,
+  jiafangcreate,
+  update_auth_info_by_admin,
+  uptoken,
+  yifangdetail,
+  jiafangdetail,
+  get_setting,
+  set_setting,
+  userdetail,
+  yop_refund_request,
+  yop_refund_query,
+} from '@/services/user';
 
 export default {
   namespace: 'form',
@@ -9,17 +22,15 @@ export default {
   state: {
     data: {
       token: '',
+      order_list: [],
     },
-    fileList: []
+    fileList: [],
   },
 
   effects: {
-
-
     *yifangcreate({ payload }, { call, put }) {
       let res = yield call(yifangcreate, payload);
-      if (res.err_msg)
-        message.error(res.err_msg);
+      if (res.err_msg) message.error(res.err_msg);
       else {
         message.success('提交成功');
         yield put(routerRedux.push('/list/yifang-list', {}));
@@ -27,8 +38,7 @@ export default {
     },
     *update_auth_info_by_admin({ payload }, { call, put }) {
       let res = yield call(update_auth_info_by_admin, payload);
-      if (res.err_msg)
-        message.error(res.err_msg);
+      if (res.err_msg) message.error(res.err_msg);
       else {
         message.success('提交成功');
         yield put({
@@ -38,11 +48,9 @@ export default {
       }
     },
 
-
     *jiafangcreate({ payload }, { call, put }) {
       let res = yield call(jiafangcreate, payload);
-      if (res.err_msg)
-        message.error(res.err_msg);
+      if (res.err_msg) message.error(res.err_msg);
       else {
         message.success('提交成功');
         yield put(routerRedux.push('/list/jiafang-list', {}));
@@ -50,8 +58,7 @@ export default {
     },
     *jiafangdetail({ payload, callback }, { call, put }) {
       let res = yield call(jiafangdetail, payload);
-      if (res.err_msg)
-        message.error(res.err_msg);
+      if (res.err_msg) message.error(res.err_msg);
       else {
         res.fileList = [];
         if (res.logo) {
@@ -67,11 +74,19 @@ export default {
       }
     },
 
-
+    *userorder({ payload, callback }, { call, put }) {
+      let res = yield call(userorder, payload);
+      if (res.err_msg) message.error(res.err_msg);
+      else {
+        yield put({
+          type: 'saveOrderList',
+          payload: res.list || [],
+        });
+      }
+    },
     *yifangdetail({ payload, callback }, { call, put }) {
       let res = yield call(yifangdetail, payload);
-      if (res.err_msg)
-        message.error(res.err_msg);
+      if (res.err_msg) message.error(res.err_msg);
       else {
         yield put({
           type: 'save',
@@ -79,22 +94,47 @@ export default {
         });
       }
     },
-    *userdetail({ payload, callback }, { call, put }) {
-      let res = yield call(userdetail, payload);
-      if (res.err_msg)
-        message.error(res.err_msg);
-      else {
-        yield put({
-          type: 'saveUserDetail',
-          payload: res,
-        });
+    *yop_refund_query({ payload, callback }, { call, put }) {
+      let res = yield call(yop_refund_query, payload);
+      if (res.err_msg) message.error(res.err_msg);
+
+      if(callback){
+        return callback()
       }
+    },
+    *yop_refund_request({ payload, callback }, { call, put }) {
+      let res = yield call(yop_refund_request, payload);
+      if (res.err_msg) return message.error(res.err_msg);
+
+      if (res.msg) {
+        message.success(res.err_msg);
+      }
+
+      if (callback) callback();
+      // yield put({
+      //   type: 'save',
+      //   payload: res,
+      // });
+    },
+
+    *userdetail({ payload, callback }, { call, put }) {
+      let detail = yield call(userdetail, payload);
+      if (detail.err_msg) return message.error(res.err_msg);
+
+      let order = yield call(userorder, payload);
+      if (order.err_msg) return message.error(res.err_msg);
+      if (callback) {
+        callback(order.list);
+      }
+      yield put({
+        type: 'saveUserDetail',
+        payload: { order_list: order.list, ...detail },
+      });
     },
     *uptoken({ payload }, { call, put }) {
       let res = yield call(uptoken, payload);
       let a = 1;
-      if (res.err_msg)
-        message.error(res.err_msg);
+      if (res.err_msg) message.error(res.err_msg);
       else {
         yield put({
           type: 'save',
@@ -124,14 +164,21 @@ export default {
   reducers: {
     saveUserDetail(state, action) {
       return {
-        data: {  ...action.payload },
+        data: { ...action.payload },
+      };
+    },
+    saveOrderList(state, action) {
+      return {
+        ...state,
+        data: state.data,
+        order_list: action.payload,
       };
     },
     save(state, action) {
       return {
         ...state,
         data: { ...state.data, ...action.payload },
-        fileList: action.payload.fileList || []
+        fileList: action.payload.fileList || [],
       };
     },
   },
