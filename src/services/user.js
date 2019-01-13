@@ -1,7 +1,7 @@
 import request from '@/utils/request';
 import { stringify } from 'qs';
-// const baseUrl = 'http://m.chaoqianwang.com'
-const baseUrl = 'http://localhost:7001'
+const baseUrl = 'http://m.chaoqianwang.com'
+// const baseUrl = 'http://localhost:7001'
 export async function query() {
   return request('/api/users');
 }

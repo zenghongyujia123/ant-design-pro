@@ -125,6 +125,10 @@ class BasicForms extends PureComponent {
                 <FormItem {...formItemLayout} label='二次付款跳转'>{getFieldDecorator('second_pay.url', { initialValue: data.second_pay ? data.second_pay.url : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input disabled />)}</FormItem>
                 <FormItem {...formItemLayout} label='二次付款协议'>{getFieldDecorator('second_pay.xieyi_title', { initialValue: data.second_pay ? data.second_pay.xieyi_title : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input disabled />)}</FormItem>
                 <FormItem {...formItemLayout} label='二次付款协议url'>{getFieldDecorator('second_pay.xieyi_image', { initialValue: data.second_pay ? data.second_pay.xieyi_image : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input disabled />)}</FormItem>
+
+                <FormItem {...formItemLayout} label='注册协议'>{getFieldDecorator('zhuce_image', { initialValue: data.zhuce_image|| '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input  />)}</FormItem>
+                <FormItem {...formItemLayout} label='隐私协议'>{getFieldDecorator('yinsi_image', { initialValue: data.yinsi_image|| '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input  />)}</FormItem>
+
                 <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
                   {/* <Popconfirm placement="top" title={text} onConfirm={confirm} okText="Yes" cancelText="No">
                     <Button>Top</Button>
