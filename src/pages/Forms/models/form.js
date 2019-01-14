@@ -15,6 +15,8 @@ import {
   userdetail,
   yop_refund_request,
   yop_refund_query,
+  customercreate,
+  customerdetail
 } from '@/services/user';
 
 export default {
@@ -29,6 +31,15 @@ export default {
   },
 
   effects: {
+    
+    *customercreate({ payload }, { call, put }) {
+      let res = yield call(customercreate, payload);
+      if (res.err_msg) message.error(res.err_msg);
+      else {
+        message.success('提交成功');
+        yield put(routerRedux.push('/list/customer-list', {}));
+      }
+    },
     *yifangcreate({ payload }, { call, put }) {
       let res = yield call(yifangcreate, payload);
       if (res.err_msg) message.error(res.err_msg);
@@ -87,6 +98,16 @@ export default {
     },
     *yifangdetail({ payload, callback }, { call, put }) {
       let res = yield call(yifangdetail, payload);
+      if (res.err_msg) message.error(res.err_msg);
+      else {
+        yield put({
+          type: 'save',
+          payload: res,
+        });
+      }
+    },
+    *customerdetail({ payload, callback }, { call, put }) {
+      let res = yield call(customerdetail, payload);
       if (res.err_msg) message.error(res.err_msg);
       else {
         yield put({

@@ -1,4 +1,12 @@
-import { userlist, orderlist, yifanglist,jiafanglist,get_setting,set_setting } from '@/services/user';
+import {
+  userlist,
+  orderlist,
+  customerlist,
+  yifanglist,
+  jiafanglist,
+  get_setting,
+  set_setting,
+} from '@/services/user';
 import { message } from 'antd';
 
 export default {
@@ -8,16 +16,15 @@ export default {
     data: {
       list: [],
       pagination: {},
-      first_pay:{},
-      second_pay:{}
+      first_pay: {},
+      second_pay: {},
     },
   },
 
   effects: {
     *get_setting({ payload }, { call, put }) {
       let res = yield call(get_setting, payload);
-      if (res.err_msg)
-        message.error(res.err_msg);
+      if (res.err_msg) message.error(res.err_msg);
       else {
         yield put({
           type: 'save',
@@ -27,8 +34,7 @@ export default {
     },
     *set_setting({ payload }, { call, put }) {
       let res = yield call(set_setting, payload);
-      if (res.err_msg)
-        message.error(res.err_msg);
+      if (res.err_msg) message.error(res.err_msg);
       else {
         message.success('提交成功');
         yield put({
@@ -65,7 +71,14 @@ export default {
         type: 'save',
         payload: response,
       });
-    }
+    },
+    *customerlist({ payload }, { call, put }) {
+      const response = yield call(customerlist, payload);
+      yield put({
+        type: 'save',
+        payload: response,
+      });
+    },
   },
 
   reducers: {

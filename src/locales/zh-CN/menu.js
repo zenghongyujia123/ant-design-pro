@@ -9,6 +9,7 @@ export default {
   'menu.form.yifangdetail': '乙方详情',
   'menu.form.jiafangdetail': '甲方详情',
   'menu.form.userdetail': '用户详情',
+  'menu.form.customerdetail': '客服详情',
   
   'menu.form.stepform': '分步表单',
   'menu.form.stepform.info': '分步表单（填写转账信息）',
@@ -21,6 +22,7 @@ export default {
   'menu.list.ordertable': '订单列表',
   'menu.list.yifangtable': '乙方列表',
   'menu.list.jiafangtable': '甲方列表',
+  'menu.list.customertable': '客服列表',
   'menu.list.settingdetail': '设置',
   'menu.list.basiclist': '标准列表',
   'menu.list.cardlist': '卡片列表',

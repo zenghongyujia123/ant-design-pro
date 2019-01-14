@@ -55,6 +55,11 @@ export default [
             component: './Forms/JiaFangDetail',
           },
           {
+            path: '/form/customer-detail',
+            name: 'customerdetail',
+            component: './Forms/CustomerDetail',
+          },
+          {
             path: '/form/user-detail',
             name: 'userdetail',
             component: './Forms/UserDetail',
@@ -80,6 +85,11 @@ export default [
         path: '/list/jiafang-list',
         name: 'list.jiafangtable',
         component: './List/JiaFangList',
+      },
+      {
+        path: '/list/customer-list',
+        name: 'list.customertable',
+        component: './List/CustomerList',
       },
       {
         path: '/list/setting-detail',

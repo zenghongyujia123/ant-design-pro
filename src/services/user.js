@@ -38,15 +38,21 @@ export async function jiafanglist(params) {
 export async function jiafangcreate(params) {
   return request(`${baseUrl}/jiafang/create`, { method: 'POST', body: params });
 }
-
 export async function jiafangdetail(params) {
   return request(`${baseUrl}/jiafang/detail`, { method: 'POST', body: params });
 }
-
+export async function customerlist(params) {
+  return request(`${baseUrl}/customer/list`, { method: 'POST', body: params });
+}
+export async function customercreate(params) {
+  return request(`${baseUrl}/customer/create`, { method: 'POST', body: params });
+}
+export async function customerdetail(params) {
+  return request(`${baseUrl}/customer/detail`, { method: 'POST', body: params });
+}
 export async function yifangdetail(params) {
   return request(`${baseUrl}/yifang/detail`, { method: 'POST', body: params });
 }
-
 export async function userlogin(params) {
   return request(`${baseUrl}/d/user/dsignin`, { method: 'POST', body: params });
 }
