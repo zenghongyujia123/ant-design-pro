@@ -161,6 +161,28 @@ class BasicForms extends PureComponent {
       }
     });
   };
+
+  reset_user() {
+    const { dispatch, form, data } = this.props;
+    dispatch({
+      type: 'form/reset_user',
+      payload: {
+        user_id: this.props.location.query._id,
+      },
+      callback: () => {
+        dispatch({
+          type: 'form/userdetail',
+          payload: {
+            user_id: this.props.location.query._id,
+          },
+          callback: order_list => {
+            this.setState({ order_list });
+          },
+        });
+      },
+    });
+  }
+  
   yop_refund_query(e,order) {
     const { dispatch, form, data } = this.props;
 
@@ -508,8 +530,8 @@ class BasicForms extends PureComponent {
             <Divider />
             refund_status first_refund_list first_refund_status
             <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
-              <Button type="primary" htmlType="submit" loading={submitting}>
-                保存
+              <Button type="danger" loading={submitting} onClick={e=>{this.reset_user()}}>
+                重置用户
               </Button>
             </FormItem>
           </Form>

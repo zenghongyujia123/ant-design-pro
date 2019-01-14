@@ -2,6 +2,7 @@ import { routerRedux } from 'dva/router';
 import { message } from 'antd';
 import { fakeSubmitForm } from '@/services/api';
 import {
+  reset_user,
   userorder,
   yifangcreate,
   jiafangcreate,
@@ -130,6 +131,12 @@ export default {
         type: 'saveUserDetail',
         payload: { order_list: order.list, ...detail },
       });
+    },
+    *reset_user({ payload, callback }, { call, put }) {
+      let res = yield call(reset_user, payload);
+      if (res.err_msg) return message.error(res.err_msg);
+      if (res.msg) return message.success(res.msg);
+      return callback()
     },
     *uptoken({ payload }, { call, put }) {
       let res = yield call(uptoken, payload);
