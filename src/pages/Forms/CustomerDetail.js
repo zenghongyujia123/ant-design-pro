@@ -119,6 +119,8 @@ class BasicForms extends PureComponent {
             <FormItem {...formItemLayout} label='客服密码'>{getFieldDecorator('password', { initialValue: data.password || '', rules: [{ required: true, message: '请输入password' }], })(<Input placeholder='password' />)}</FormItem>
             <FormItem {...formItemLayout} label='客服角色'>{getFieldDecorator('customer_role', { initialValue: data.customer_role || '' , rules: [{ required: true, message: '请输入role' }],})(<Input placeholder='role' />)}</FormItem>
             <FormItem {...formItemLayout} label='客服状态'>  {getFieldDecorator('status', { initialValue: data.status || '' , rules: [{ required: true, message: '请输入status' }],})(<Input placeholder='status' />)}</FormItem>
+            <FormItem {...formItemLayout} label='客服姓名'>  {getFieldDecorator('name', { initialValue: data.name || '' , rules: [{ required: true, message: '请输入name' }],})(<Input placeholder='name' />)}</FormItem>
+            <FormItem {...formItemLayout} label='客服手机'>  {getFieldDecorator('phone', { initialValue: data.phone || '' , rules: [{ required: true, message: '请输入phone' }],})(<Input placeholder='phone' />)}</FormItem>
             <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
               <Button type="primary" htmlType="submit" loading={submitting}>
                 保存

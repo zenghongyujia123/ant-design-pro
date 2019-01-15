@@ -58,6 +58,16 @@ class TableList extends PureComponent {
       width: 150,
     },
     {
+      title: '姓名',
+      dataIndex: 'name',
+      width: 150,
+    },
+    {
+      title: '手机号',
+      dataIndex: 'phone',
+      width: 150,
+    },
+    {
       title: '角色',
       dataIndex: 'customer_role',
       width: 150,
@@ -142,36 +152,8 @@ class TableList extends PureComponent {
     } = this.props;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
-        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-          <Col md={8} sm={24}>
-            <FormItem label="规则名称">
-              {getFieldDecorator('name')(<Input placeholder="请输入" />)}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="使用状态">
-              {getFieldDecorator('status')(
-                <Select placeholder="请选择" style={{ width: '100%' }}>
-                  <Option value="0">关闭</Option>
-                  <Option value="1">运行中</Option>
-                </Select>
-              )}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="更新日期">
-              {getFieldDecorator('date')(
-                <DatePicker style={{ width: '100%' }} placeholder="请输入更新日期" />
-              )}
-            </FormItem>
-          </Col>
-        </Row>
-
         <div style={{ overflow: 'hidden' }}>
           <div style={{ float: 'right', marginBottom: 24 }}>
-            <Button type="primary" htmlType="submit">
-              查询
-            </Button>
             <a href="/form/customer-detail">
               <Button icon="plus" type="primary" style={{ marginLeft: '10px' }}>
                 新建

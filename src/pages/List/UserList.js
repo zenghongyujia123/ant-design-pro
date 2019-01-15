@@ -37,12 +37,12 @@ const getValue = obj =>
 const statusMap = ['error', 'success'];
 const status = ['否', '是'];
 const refundDic = {
-  'none': '未申请',
-  'submit': '已提交',
-  'unpass': '未通过',
-  'unpay': '待打款',
-  'pay': '已打款',
-}
+  none: '未申请',
+  submit: '已提交',
+  unpass: '未通过',
+  unpay: '待打款',
+  pay: '已打款',
+};
 
 @Form.create()
 /* eslint react/no-multi-comp:0 */
@@ -113,30 +113,17 @@ class TableList extends PureComponent {
       dataIndex: 'parent',
     },
     {
-      title: '是否登陆',
-      dataIndex: 'app_name',
-      render(val) {
-        return (
-          <Badge status={statusMap[val ? 1 : 0]} text={status[val ? 1 : 0]} />
-        );
-      },
-    },
-    {
       title: '首次退款状态',
       dataIndex: 'first_refund_status',
       render(val) {
-        return (
-          <Badge status={statusMap[0]} text={refundDic[val]} />
-        );
+        return <Badge status={statusMap[0]} text={refundDic[val]} />;
       },
     },
     {
       title: '二次退款状态',
       dataIndex: 'refund_status',
       render(val) {
-        return (
-          <Badge status={statusMap[0]} text={refundDic[val]} />
-        );
+        return <Badge status={statusMap[0]} text={refundDic[val]} />;
       },
     },
     {
@@ -261,7 +248,11 @@ class TableList extends PureComponent {
           <Col md={4} sm={24}>
             <FormItem label="创建日期">
               {getFieldDecorator('created_date')(
-                <DatePicker format="YYYY/MM/DD" style={{ width: '100%' }} placeholder="请输入更新日期" />
+                <DatePicker
+                  format="YYYY/MM/DD"
+                  style={{ width: '100%' }}
+                  placeholder="请输入更新日期"
+                />
               )}
             </FormItem>
           </Col>
