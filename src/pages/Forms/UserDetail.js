@@ -182,8 +182,8 @@ class BasicForms extends PureComponent {
       },
     });
   }
-  
-  yop_refund_query(e,order) {
+
+  yop_refund_query(e, order) {
     const { dispatch, form, data } = this.props;
 
     dispatch({
@@ -205,7 +205,27 @@ class BasicForms extends PureComponent {
       },
     });
   }
+  yop_bindcard_pay_query_by_user(){
+    const { dispatch, form, data } = this.props;
 
+    dispatch({
+      type: 'form/yop_bindcard_pay_query_by_user',
+      payload: {
+        user_id: this.props.location.query._id,
+      },
+      callback: () => {
+        dispatch({
+          type: 'form/userdetail',
+          payload: {
+            user_id: this.props.location.query._id,
+          },
+          callback: order_list => {
+            this.setState({ order_list });
+          },
+        });
+      },
+    });
+  }
   yop_refund_request(e, order) {
     const { dispatch, form, data } = this.props;
     if (order.status !== 'PAY_SUCCESS') {
@@ -347,6 +367,16 @@ class BasicForms extends PureComponent {
                 </RadioGroup>
               }
             </FormItem>
+            <Button
+              type="primary"
+              loading={submitting}
+              style={{ marginRight: '10PX' }}
+              onClick={e => {
+                this.yop_bindcard_pay_query_by_user();
+              }}
+            >
+              刷新总订单
+            </Button>
             {data.order_list.map((order, index) => {
               return (
                 <div key={index} style={{ background: '#ECECEC', padding: '30px' }}>
@@ -362,7 +392,7 @@ class BasicForms extends PureComponent {
                     <Button
                       type="primary"
                       loading={submitting}
-                      style={{marginRight:'10PX'}}
+                      style={{ marginRight: '10PX' }}
                       onClick={e => {
                         this.yop_refund_request(e, order);
                       }}
@@ -530,7 +560,13 @@ class BasicForms extends PureComponent {
             <Divider />
             refund_status first_refund_list first_refund_status
             <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
-              <Button type="danger" loading={submitting} onClick={e=>{this.reset_user()}}>
+              <Button
+                type="danger"
+                loading={submitting}
+                onClick={e => {
+                  this.reset_user();
+                }}
+              >
                 重置用户
               </Button>
             </FormItem>

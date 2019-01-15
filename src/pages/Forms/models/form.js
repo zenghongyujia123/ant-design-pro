@@ -16,7 +16,8 @@ import {
   yop_refund_request,
   yop_refund_query,
   customercreate,
-  customerdetail
+  customerdetail,
+  yop_bindcard_pay_query_by_user
 } from '@/services/user';
 
 export default {
@@ -85,7 +86,14 @@ export default {
         });
       }
     },
+    *yop_bindcard_pay_query_by_user({ payload, callback }, { call, put }) {
+      let res = yield call(yop_bindcard_pay_query_by_user, payload);
+      if (res.err_msg) message.error(res.err_msg);
 
+      if(callback){
+        return callback()
+      }
+    },
     *userorder({ payload, callback }, { call, put }) {
       let res = yield call(userorder, payload);
       if (res.err_msg) message.error(res.err_msg);

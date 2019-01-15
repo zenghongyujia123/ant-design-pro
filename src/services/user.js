@@ -17,6 +17,9 @@ export async function yop_refund_request(params) {
 export async function yop_refund_query(params) {
   return request(`${baseUrl}/yop_refund_query`, { method: 'POST', body: params });
 }
+export async function yop_bindcard_pay_query_by_user(params) {
+  return request(`${baseUrl}/yop_bindcard_pay_query_by_user`, { method: 'POST', body: params });
+}
 export async function userdetail(params) {
   return request(`${baseUrl}/user/detail`, { method: 'POST', body: params });
 }
