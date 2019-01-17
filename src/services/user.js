@@ -20,6 +20,13 @@ export async function yop_refund_query(params) {
 export async function yop_bindcard_pay_query_by_user(params) {
   return request(`${baseUrl}/yop_bindcard_pay_query_by_user`, { method: 'POST', body: params });
 }
+export async function yop_auth_unbind_request(params) {
+  return request(`${baseUrl}/yop_auth_unbind_request`, { method: 'POST', body: params });
+}
+export async function yop_auth_bindcard_list_by_user(params) {
+  return request(`${baseUrl}/yop_auth_bindcard_list_by_user`, { method: 'POST', body: params });
+}
+
 export async function userdetail(params) {
   return request(`${baseUrl}/user/detail`, { method: 'POST', body: params });
 }

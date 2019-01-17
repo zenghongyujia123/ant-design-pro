@@ -41,6 +41,7 @@ class BasicForms extends PureComponent {
     previewImage: '',
     data: {},
     order_list: [],
+    cardlist: [],
   };
 
   componentDidMount() {
@@ -51,8 +52,8 @@ class BasicForms extends PureComponent {
         payload: {
           user_id: this.props.location.query._id,
         },
-        callback: order_list => {
-          this.setState({ order_list });
+        callback: ({ order_list, cardlist = [] }) => {
+          this.setState({ order_list, cardlist });
         },
       });
 
@@ -162,6 +163,27 @@ class BasicForms extends PureComponent {
     });
   };
 
+  yop_auth_unbind_request() {
+    const { dispatch, form, data } = this.props;
+    dispatch({
+      type: 'form/yop_auth_unbind_request',
+      payload: {
+        user_id: this.props.location.query._id,
+      },
+      callback: () => {
+        dispatch({
+          type: 'form/userdetail',
+          payload: {
+            user_id: this.props.location.query._id,
+          },
+          callback: ({ order_list, cardlist = [] }) => {
+            this.setState({ order_list, cardlist });
+          },
+        });
+      },
+    });
+  }
+
   reset_user() {
     const { dispatch, form, data } = this.props;
     dispatch({
@@ -175,8 +197,8 @@ class BasicForms extends PureComponent {
           payload: {
             user_id: this.props.location.query._id,
           },
-          callback: order_list => {
-            this.setState({ order_list });
+          callback: ({ order_list, cardlist = [] }) => {
+            this.setState({ order_list, cardlist });
           },
         });
       },
@@ -198,14 +220,14 @@ class BasicForms extends PureComponent {
           payload: {
             user_id: this.props.location.query._id,
           },
-          callback: order_list => {
-            this.setState({ order_list });
+          callback: ({ order_list, cardlist = [] }) => {
+            this.setState({ order_list, cardlist });
           },
         });
       },
     });
   }
-  yop_bindcard_pay_query_by_user(){
+  yop_bindcard_pay_query_by_user() {
     const { dispatch, form, data } = this.props;
 
     dispatch({
@@ -219,8 +241,8 @@ class BasicForms extends PureComponent {
           payload: {
             user_id: this.props.location.query._id,
           },
-          callback: order_list => {
-            this.setState({ order_list });
+          callback: ({ order_list, cardlist = [] }) => {
+            this.setState({ order_list, cardlist });
           },
         });
       },
@@ -244,8 +266,8 @@ class BasicForms extends PureComponent {
           payload: {
             user_id: this.props.location.query._id,
           },
-          callback: order_list => {
-            this.setState({ order_list });
+          callback: ({ order_list, cardlist = [] }) => {
+            this.setState({ order_list, cardlist });
           },
         });
       },
@@ -367,19 +389,52 @@ class BasicForms extends PureComponent {
                 </RadioGroup>
               }
             </FormItem>
-            <Button
-              type="primary"
-              loading={submitting}
-              style={{ marginRight: '10PX' }}
-              onClick={e => {
-                this.yop_bindcard_pay_query_by_user();
-              }}
-            >
-              刷新总订单
-            </Button>
+            <Divider>银行卡相关</Divider>
+            <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
+              <Button
+                type="danger"
+                loading={submitting}
+                onClick={e => {
+                  this.yop_auth_unbind_request();
+                }}
+              >
+                解绑银行卡
+              </Button>
+            </FormItem>
+            {data.cardlist.map((card, index) => {
+              return (
+                <div
+                  key={index}
+                  style={{ background: '#ECECEC', padding: '30px', width: '500px', float: 'left' }}
+                >
+                  <Card title={`银行卡-${card.cardtop}*******${card.cardlast}`} bordered={false}>
+                    <p>{`银行卡编号：${card.bankcode}`}</p>
+                    <p>{`银行卡名称：${card.cardname}`}</p>
+
+                    {/* <p>{`易宝订单：${card.info.yborderid}`}</p> */}
+                  </Card>
+                </div>
+              );
+            })}
+            <Divider>订单相关</Divider>
+            <FormItem {...formItemLayout} label="刷新总订单">
+              <Button
+                type="primary"
+                loading={submitting}
+                style={{ marginRight: '10PX' }}
+                onClick={e => {
+                  this.yop_bindcard_pay_query_by_user();
+                }}
+              >
+                刷新总订单
+              </Button>
+            </FormItem>
             {data.order_list.map((order, index) => {
               return (
-                <div key={index} style={{ background: '#ECECEC', padding: '30px' }}>
+                <div
+                  key={index}
+                  style={{ background: '#ECECEC', padding: '30px', width: '500px', float: 'left' }}
+                >
                   <Card title={`订单号-${order._id}`} bordered={false}>
                     <p>{`易宝订单：${order.info.yborderid}`}</p>
                     <p>{`订单类型：${order.productname}`}</p>
@@ -570,6 +625,7 @@ class BasicForms extends PureComponent {
                 重置用户
               </Button>
             </FormItem>
+            
           </Form>
         </Card>
       </PageHeaderWrapper>

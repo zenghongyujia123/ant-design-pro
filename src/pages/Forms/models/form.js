@@ -17,7 +17,9 @@ import {
   yop_refund_query,
   customercreate,
   customerdetail,
-  yop_bindcard_pay_query_by_user
+  yop_bindcard_pay_query_by_user,
+  yop_auth_unbind_request,
+  yop_auth_bindcard_list_by_user
 } from '@/services/user';
 
 export default {
@@ -27,6 +29,7 @@ export default {
     data: {
       token: '',
       order_list: [],
+      cardlist:[]
     },
     fileList: [],
   },
@@ -153,16 +156,26 @@ export default {
 
       let order = yield call(userorder, payload);
       if (order.err_msg) return message.error(res.err_msg);
+
+      let bank = yield call(yop_auth_bindcard_list_by_user, payload);
+      if (bank.err_msg) return message.error(bank.err_msg);
       if (callback) {
-        callback(order.list);
+        callback({cardlist:bank.cardlist,order_list: order.list});
       }
+
       yield put({
         type: 'saveUserDetail',
-        payload: { order_list: order.list, ...detail },
+        payload: { order_list: order.list, cardlist:bank.cardlist||[],...detail },
       });
     },
     *reset_user({ payload, callback }, { call, put }) {
       let res = yield call(reset_user, payload);
+      if (res.err_msg) return message.error(res.err_msg);
+      if (res.msg) return message.success(res.msg);
+      return callback()
+    },
+    *yop_auth_unbind_request({ payload, callback }, { call, put }) {
+      let res = yield call(yop_auth_unbind_request, payload);
       if (res.err_msg) return message.error(res.err_msg);
       if (res.msg) return message.success(res.msg);
       return callback()
