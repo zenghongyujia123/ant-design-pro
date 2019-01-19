@@ -19,14 +19,13 @@ import {
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import styles from './style.less';
 
-
+const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
 @connect(({ loading, form }) => ({
-  fileList: form.fileList,
   data: form.data,
   submitting: loading.effects['form/jiafangcreate'],
 }))
@@ -35,10 +34,9 @@ const { TextArea } = Input;
 class BasicForms extends PureComponent {
 
   state = {
-    previewVisible: false,
-    previewImage: '',
-    data: {},
-    fileList: this.props.fileList,
+    data: {
+    },
+    status:''
   };
 
   componentDidMount() {
@@ -49,8 +47,8 @@ class BasicForms extends PureComponent {
         payload: {
           jiafang_id: this.props.location.query._id
         },
-        callback: (fileList) => {
-          this.setState({ fileList })
+        callback: () => {
+          this.setState({ status: this.props.data.status})
         }
       });
     }
@@ -74,10 +72,6 @@ class BasicForms extends PureComponent {
       }
     });
   };
-
-  handleLogoChange = ({ fileList }) => {
-    this.setState({ fileList });
-  }
 
   render() {
 
@@ -103,7 +97,7 @@ class BasicForms extends PureComponent {
     const {
       form: { getFieldDecorator, getFieldValue },
     } = this.props;
-    const { previewVisible, previewImage, fileList } = this.state;
+    const {  } = this.state;
     const uploadButton = (
       <div>
         <Icon type="plus" />
@@ -137,8 +131,9 @@ class BasicForms extends PureComponent {
             <FormItem {...formItemLayout} label='贷超其他3'>  {getFieldDecorator('d_str3', { initialValue: data.d_str3 || '' })(<Input placeholder='2004人申请通过' />)}</FormItem>
             <FormItem {...formItemLayout} label='贷超其他4'>  {getFieldDecorator('d_str4', { initialValue: data.d_str4 || '' })(<Input placeholder='7-30天' />)}</FormItem>
             <FormItem {...formItemLayout} label='贷超其他5'>  {getFieldDecorator('d_str5', { initialValue: data.d_str5 || '' })(<Input placeholder='节钱极速通道，10分钟必须下款' />)}</FormItem>
-            {/* <FormItem {...formItemLayout} label='贷超其他6'>  {getFieldDecorator('d_str6', { initialValue: data.d_str6 || '' })(<Input placeholder='请输入贷超其他6' />)}</FormItem>
-            <FormItem {...formItemLayout} label='贷超其他7'>  {getFieldDecorator('d_str7', { initialValue: data.d_str7 || '' })(<Input placeholder='请输入贷超其他7' />)}</FormItem> */}
+             <FormItem {...formItemLayout} label='贷超其他6'>  {getFieldDecorator('d_str6', { initialValue: data.d_str6 || '' })(<Input placeholder='请输入贷超其他6' />)}</FormItem> 
+             <FormItem {...formItemLayout} label='贷超其他7'>  {getFieldDecorator('d_str7', { initialValue: data.d_str7 || '' })(<Input placeholder='如果放入贷超就写贷超' />)}</FormItem> 
+            <FormItem {...formItemLayout} label='状态'>  {getFieldDecorator('status', { initialValue: data.status || '' })(<Input placeholder='valid invalid' />)}</FormItem> 
 
             <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
               <Button type="primary" htmlType="submit" loading={submitting}>

@@ -84,7 +84,7 @@ export default {
           callback(res.fileList);
         }
         yield put({
-          type: 'save',
+          type: 'saveJiafangDetail',
           payload: res,
         });
       }
@@ -212,6 +212,11 @@ export default {
 
   reducers: {
     saveUserDetail(state, action) {
+      return {
+        data: { ...action.payload },
+      };
+    },
+    saveJiafangDetail(state, action) {
       return {
         data: { ...action.payload },
       };
