@@ -116,7 +116,7 @@ class BasicForms extends PureComponent {
                 <FormItem {...formItemLayout} label='首次付款类型'>{getFieldDecorator('first_pay.producttype', { initialValue: data.first_pay ? data.first_pay.producttype : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input disabled />)}</FormItem>
                 <FormItem {...formItemLayout} label='首次付款跳转'>{getFieldDecorator('first_pay.url', { initialValue: data.first_pay ? data.first_pay.url : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input disabled />)}</FormItem>
                 <FormItem {...formItemLayout} label='首次付款协议'>{getFieldDecorator('first_pay.xieyi_title', { initialValue: data.first_pay ? data.first_pay.xieyi_title : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input disabled />)}</FormItem>
-                <FormItem {...formItemLayout} label='首次付款协议url'>{getFieldDecorator('first_pay.xieyi_image', { initialValue: data.first_pay ? data.first_pay.xieyi_image : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input disabled />)}</FormItem>
+                <FormItem {...formItemLayout} label='首次付款协议url'>{getFieldDecorator('first_pay.xieyi_image', { initialValue: data.first_pay ? data.first_pay.xieyi_image : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input />)}</FormItem>
 
                 <FormItem {...formItemLayout} label='二次付款金额'>{getFieldDecorator('second_pay.amount', { initialValue: data.second_pay ? data.second_pay.amount : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input />)}</FormItem>
                 <FormItem {...formItemLayout} label='二次付款原价'>{getFieldDecorator('second_pay.source_amount', { initialValue: data.second_pay ? data.second_pay.source_amount : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input />)}</FormItem>
@@ -124,7 +124,7 @@ class BasicForms extends PureComponent {
                 <FormItem {...formItemLayout} label='二次付款类型'>{getFieldDecorator('second_pay.producttype', { initialValue: data.second_pay ? data.second_pay.producttype : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input disabled />)}</FormItem>
                 <FormItem {...formItemLayout} label='二次付款跳转'>{getFieldDecorator('second_pay.url', { initialValue: data.second_pay ? data.second_pay.url : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input disabled />)}</FormItem>
                 <FormItem {...formItemLayout} label='二次付款协议'>{getFieldDecorator('second_pay.xieyi_title', { initialValue: data.second_pay ? data.second_pay.xieyi_title : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input disabled />)}</FormItem>
-                <FormItem {...formItemLayout} label='二次付款协议url'>{getFieldDecorator('second_pay.xieyi_image', { initialValue: data.second_pay ? data.second_pay.xieyi_image : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input disabled />)}</FormItem>
+                <FormItem {...formItemLayout} label='二次付款协议url'>{getFieldDecorator('second_pay.xieyi_image', { initialValue: data.second_pay ? data.second_pay.xieyi_image : '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input />)}</FormItem>
 
                 <FormItem {...formItemLayout} label='注册协议'>{getFieldDecorator('zhuce_image', { initialValue: data.zhuce_image|| '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input  />)}</FormItem>
                 <FormItem {...formItemLayout} label='隐私协议'>{getFieldDecorator('yinsi_image', { initialValue: data.yinsi_image|| '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input  />)}</FormItem>
