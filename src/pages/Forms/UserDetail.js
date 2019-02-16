@@ -389,6 +389,14 @@ class BasicForms extends PureComponent {
                 </RadioGroup>
               }
             </FormItem>
+            <FormItem {...formItemLayout} label="是否黑名单">
+              {
+                <RadioGroup value={data.is_black}>
+                  <Radio value={true}>是</Radio>
+                  <Radio value={false}>否</Radio>
+                </RadioGroup>
+              }
+            </FormItem>
             <Divider>银行卡相关</Divider>
             <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
               <Button
