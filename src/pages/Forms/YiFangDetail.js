@@ -96,6 +96,7 @@ class BasicForms extends PureComponent {
             <FormItem {...formItemLayout} label='其他2'>{getFieldDecorator('str2', { initialValue: data.str2 || '', })(<Input />)}</FormItem>
             <FormItem {...formItemLayout} label='其他3'>{getFieldDecorator('str3', { initialValue: data.str3 || '', })(<Input />)}</FormItem>
             <FormItem {...formItemLayout} label='其他4'>{getFieldDecorator('str4', { initialValue: data.str4 || '', })(<Input />)}</FormItem>
+            <FormItem {...formItemLayout} label='状态'>{getFieldDecorator('status', { initialValue: data.status || '', })(<Input />)}</FormItem>
 
             <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
               <Button type="primary" htmlType="submit" loading={submitting}>

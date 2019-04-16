@@ -122,7 +122,7 @@ class BasicForms extends PureComponent {
             <FormItem {...formItemLayout} label='可统计链接'>{getFieldDecorator('url_tongji', { initialValue: data.url_tongji || '' })(<Input disabled placeholder='可统计链接自动生成' />)}</FormItem>
             <FormItem {...formItemLayout} label='甲方描述'>{getFieldDecorator('desc', { initialValue: data.desc || '', rules: [{ required: true, message: '请输入甲方描述' }], })(<Input placeholder='请输入甲方描述' />)}</FormItem>
             <FormItem {...formItemLayout} label='其他1'>  {getFieldDecorator('str1', { initialValue: data.str1 || '' })(<Input placeholder='请输入其他1' />)}</FormItem>
-            <FormItem {...formItemLayout} label='其他2'>{getFieldDecorator('str2', { initialValue: data.str2 || '' })(<Input placeholder='请输入其他2' />)}</FormItem>
+            <FormItem {...formItemLayout} label='其他2'>{getFieldDecorator('str2', { initialValue: data.str2 || '' })(<Input placeholder='请输入其他2:甲方次付，甲方推荐' />)}</FormItem>
             <FormItem {...formItemLayout} label='其他3'>{getFieldDecorator('str3', { initialValue: data.str3 || '' })(<Input placeholder='请输入其他3' />)}</FormItem>
             <FormItem {...formItemLayout} label='其他4'>  {getFieldDecorator('str4', { initialValue: data.str4 || '' })(<Input placeholder='请输入其他4' />)}</FormItem>
 
