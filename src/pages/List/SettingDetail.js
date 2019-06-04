@@ -128,6 +128,7 @@ class BasicForms extends PureComponent {
 
                 <FormItem {...formItemLayout} label='注册协议'>{getFieldDecorator('zhuce_image', { initialValue: data.zhuce_image|| '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input  />)}</FormItem>
                 <FormItem {...formItemLayout} label='隐私协议'>{getFieldDecorator('yinsi_image', { initialValue: data.yinsi_image|| '', rules: [{ required: true, message: '请输入甲方名称' }], })(<Input  />)}</FormItem>
+                <FormItem {...formItemLayout} label='是否贷超'>{getFieldDecorator('shifou_daichao', { initialValue: data.shifou_daichao|| '', rules: [{ required: true, message: '是否贷超' }], })(<Input  />)}</FormItem>
 
                 <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
                   {/* <Popconfirm placement="top" title={text} onConfirm={confirm} okText="Yes" cancelText="No">
