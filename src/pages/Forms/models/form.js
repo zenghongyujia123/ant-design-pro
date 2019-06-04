@@ -157,10 +157,12 @@ export default {
       let order = yield call(userorder, payload);
       if (order.err_msg) return message.error(res.err_msg);
 
-      let bank = yield call(yop_auth_bindcard_list_by_user, payload);
-      if (bank.err_msg) return message.error(bank.err_msg);
+      // let bank = yield call(yop_auth_bindcard_list_by_user, payload);
+      // if (bank.err_msg) return message.error(bank.err_msg);
       if (callback) {
-        callback({cardlist:bank.cardlist,order_list: order.list});
+        callback({
+          // cardlist:bank.cardlist,
+          order_list: order.list});
       }
 
       yield put({
