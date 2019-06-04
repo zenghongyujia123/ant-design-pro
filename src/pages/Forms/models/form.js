@@ -167,7 +167,8 @@ export default {
 
       yield put({
         type: 'saveUserDetail',
-        payload: { order_list: order.list, cardlist:bank.cardlist||[],...detail },
+        // payload: { order_list: order.list, cardlist:bank.cardlist||[],...detail },
+        payload: { order_list: order.list, cardlist:[],...detail },
       });
     },
     *reset_user({ payload, callback }, { call, put }) {
