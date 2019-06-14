@@ -91,6 +91,15 @@ class TableList extends PureComponent {
       },
     },
     {
+      title: '点击评估',
+      dataIndex: 'is_evaluate_report',
+      render(val) {
+        return (
+          <Badge status={statusMap[val ? 1 : 0]} text={status[val  ? 1 : 0]} />
+        );
+      },
+    },
+    {
       title: '评估付费',
       dataIndex: 'is_evaluate_report_time',
       render(val) {
