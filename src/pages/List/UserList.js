@@ -92,19 +92,19 @@ class TableList extends PureComponent {
     },
     {
       title: '评估付费',
-      dataIndex: 'is_evaluate_report',
+      dataIndex: 'is_evaluate_report_time',
       render(val) {
         return (
-          <Badge status={statusMap[val === true ? 1 : 0]} text={status[val === true ? 1 : 0]} />
+          <Badge status={statusMap[val ? 1 : 0]} text={status[val  ? 1 : 0]} />
         );
       },
     },
     {
       title: '推荐付费',
-      dataIndex: 'is_smart_recommend',
+      dataIndex: 'is_smart_recommend_time',
       render(val) {
         return (
-          <Badge status={statusMap[val === true ? 1 : 0]} text={status[val === true ? 1 : 0]} />
+          <Badge status={statusMap[val  ? 1 : 0]} text={status[val ? 1 : 0]} />
         );
       },
     },
