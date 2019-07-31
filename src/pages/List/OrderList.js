@@ -84,6 +84,10 @@ class TableList extends PureComponent {
       dataIndex: 'errormsg',
     },
     {
+      title: '银行',
+      dataIndex: 'info.organName',
+    },
+    {
       title: '乙方',
       dataIndex: 'user_parent',
     },
