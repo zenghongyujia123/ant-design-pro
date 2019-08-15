@@ -85,6 +85,7 @@ class TableList extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
+      
       type: 'rule/yifanglist',
     });
   }

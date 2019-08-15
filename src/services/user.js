@@ -2,7 +2,7 @@ import request from '@/utils/request';
 import { stringify } from 'qs';
 // const baseUrl = 'http://nm.chaoqianwang.com'
 // const baseUrl = 'http://t.rongbeihulian.com'
-const baseUrl = 'http://wkyjj.rongbeihulian.com'; 
+const baseUrl = 'http://tf.t10.ltd'; 
 // const baseUrl = 'http://localhost:7002'
 export async function query() {
   return request('/api/users');

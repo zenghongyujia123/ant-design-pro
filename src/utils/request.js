@@ -93,14 +93,16 @@ export default function request(url, option) {
         'Content-Type': 'application/json; charset=utf-8',
         ...newOptions.headers,
         top_session: localStorage.getItem('top_session'),
+        created_date:'2019-08-11'
       };
-      newOptions.body = JSON.stringify({...newOptions.body,top_session: localStorage.getItem('top_session')});
+      newOptions.body = JSON.stringify({...newOptions.body,top_session: localStorage.getItem('top_session')}  );
     } else {
       // newOptions.body is FormData
       newOptions.headers = {
         Accept: 'application/json',
         ...newOptions.headers,
         top_session: localStorage.getItem('top_session'),
+        created_date:'2019-08-11'
       };
     }
   }
