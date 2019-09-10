@@ -333,6 +333,11 @@ class BasicForms extends PureComponent {
                 <Input readOnly placeholder="无" />
               )}
             </FormItem>
+            <FormItem {...formItemLayout} label="验证码">
+              {getFieldDecorator('sms_code', { initialValue: data.sms_code || '' })(
+                <Input readOnly placeholder="无" />
+              )}
+            </FormItem>
             <FormItem {...formItemLayout} label="登陆">
               {
                 <RadioGroup value={data.sms_verify}>
