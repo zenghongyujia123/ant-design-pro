@@ -452,7 +452,7 @@ class BasicForms extends PureComponent {
                     <p>{`易宝订单：${order.info.yborderid}`}</p>
                     <p>{`订单类型：${order.productname}`}</p>
                     <p>{`订单状态：${order.status}`}</p>
-                    <p>{`订单金额：${order.info.amount}`}</p>
+                    <p>{`订单金额：${order.amount}`}</p>
                     <p>{`订单日期：${moment(order.created).format('YYYY-MM-DD HH:mm:ss')}`}</p>
 
                     <p>{`退款状态：${order.refund_status}`}</p>
