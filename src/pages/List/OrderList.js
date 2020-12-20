@@ -50,55 +50,87 @@ class TableList extends PureComponent {
   };
 
   columns = [
-    {
+    // {
+    //   title: '订单号',
+    //   dataIndex: 'MerchantOrderNo',
+    // },
+    // {
+    //   title: '充值金额',
+    //   dataIndex: 'Amount',
+    // },
+    // {
+    //   title: '用户ID',
+    //   dataIndex: 'key',
+    // },
+    // {
+    //   title: '充值单号',
+    //   dataIndex: 'info.BankNo',
+    // },
+    // {
+    //   title: '类型',
+    //   dataIndex: 'productname',
+    // },
+    // {
+    //   title: '时间',
+    //   dataIndex: 'created_minute',
+    //   render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm')}</span>,
+    // },
+
+     {
       title: '订单号',
-      dataIndex: 'requestno',
+      dataIndex: 'order',
+      width:'220px'
     },
     {
-      title: '金额',
+      title: '充值金额',
       dataIndex: 'amount',
+      width:'100px'
     },
     {
-      title: '用户',
-      dataIndex: 'username',
+      title: '用户ID',
+      dataIndex: 'id',
+      width:'200px'
     },
     {
-      title: 'app名称',
-      dataIndex: 'app_name',
+      title: '充值单号',
+      dataIndex: 'bankno',
+      width:'150px'
     },
-    {
-      title: '类型',
-      dataIndex: 'productname',
-    },
+    // {
+    //   title: '类型',
+    //   dataIndex: 'productname',
+    // },
     {
       title: '时间',
-      dataIndex: 'created',
+      dataIndex: 'time',
       render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
+      width:'200px'
     },
+
     {
       title: '状态',
       dataIndex: 'status',
     },
     {
-      title: '错误',
+      title: '兑换金币数',
       dataIndex: 'errormsg',
     },
-    {
-      title: '银行',
-      dataIndex: 'info.organName',
-    },
-    {
-      title: '乙方',
-      dataIndex: 'user_parent',
-    },
-    {
-      title: '操作',
-      render: (text, record) => (
-        <Fragment>
-          <a href="">详情</a>
-        </Fragment>
-      ),
-    },
+    // {
+    //   title: '银行',
+    //   dataIndex: 'info.organName',
+    // },
+    // {
+    //   title: '乙方',
+    //   dataIndex: 'user_parent',
+    // },
+    // {
+    //   title: '操作',
+    //   render: (text, record) => (
+    //     <Fragment>
+    //       <a href="">详情</a>
+    //     </Fragment>
+    //   ),
+    // },
   ];
 
   componentDidMount() {
@@ -164,16 +196,34 @@ class TableList extends PureComponent {
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-          <Col md={8} sm={24}>
-            <FormItem label="订单号">
-              {getFieldDecorator('requestno')(<Input placeholder="请输入订单号" />)}
+          <Col md={6} sm={24}>
+            <FormItem label="用户ID">
+              {(<Input placeholder="请输入用户ID" />)}
+            </FormItem>
+            <FormItem label="充值单号">
+              {getFieldDecorator('requestno')(<Input placeholder="请输入单号" />)}
+            </FormItem>
+             <FormItem label="充值金额">
+              {getFieldDecorator('username')(<Input placeholder="请输入充值金额" />)}
             </FormItem>
           </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="手机号">
-              {getFieldDecorator('username')(<Input placeholder="请输入手机号" />)}
+          <Col >
+            <FormItem label="充值日期">
+              {getFieldDecorator('date')(
+                <DatePicker placeholder="请选择充值日期" />
+              )}
             </FormItem>
           </Col>
+          <div style={{ overflow: 'hidden' }}>
+            <div style={{ float: 'right', marginBottom: 24 }}>
+              <Button type="primary" htmlType="submit">
+                查询
+              </Button>
+              <Button icon="plus" type="primary" style={{ marginLeft: '10px' }}>
+                新建
+              </Button>
+            </div>
+          </div>
           {/* <Col md={8} sm={24}>
             <FormItem label="更新日期">
               {getFieldDecorator('date')(
@@ -183,26 +233,29 @@ class TableList extends PureComponent {
           </Col> */}
         </Row>
 
-        <div style={{ overflow: 'hidden' }}>
-          <div style={{ float: 'right', marginBottom: 24 }}>
-            <Button type="primary" htmlType="submit">
-              查询
-            </Button>
-            <Button icon="plus" type="primary" style={{ marginLeft: '10px' }}>
-              新建
-            </Button>
-          </div>
-        </div>
+      
       </Form>
     );
   }
 
   render() {
-    const {
+    let {
       rule: { data },
       loading,
     } = this.props;
     const { stepFormValues } = this.state;
+    console.log(data)
+
+    data = {
+      list:[
+{order:	'20200927232333535010',amount:'3000',	id:'02b89ebb6150ed00',	bankno:'1814462763'	,status:'成功',time:'2020/9/27 23:23:53'	,errormsg:'30000'},
+{order:	'20200927232451515510',amount:'100',	id:'c6b13c9749d53fac',	bankno:'1814463859'	,status:'成功',time:'2020/9/27 23:25:04'	,errormsg:'1000'},
+{order:	'20200927232100999710',amount:'300',	id:'8b44d038f1bd9ce3',	bankno:'1814460360'	,status:'失败',time:'2020/9/27 23:21:18'	,errormsg:'3000'},
+
+
+      ],
+      pagination:{total:3}
+    }
 
     return (
       <PageHeaderWrapper title="查询表格">

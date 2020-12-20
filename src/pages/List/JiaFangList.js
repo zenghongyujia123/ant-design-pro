@@ -53,79 +53,20 @@ class TableList extends PureComponent {
 
   columns = [
     {
-      title: '甲方名称',
-      dataIndex: 'name',
+      title: '用户ID',
+      dataIndex: 'id',
       width: 150,
     },
     {
-      title: '描述',
-      dataIndex: 'desc',
+      title: '注册时间',
+      dataIndex: 'time',
       width: 150,
     },
     {
-      title: 'logo',
-      dataIndex: 'logo',
-      width: 150,
-      render: (logo) => {
-        return <Avatar style={{ borderRadius: 0, width: 50, height: 50 }} src={logo} />
-      }
-    },
-    {
-      title: '退款示列',
-      dataIndex: 'failed_img',
-      width: 150,
-      render: (failed_img) => {
-        return <Avatar style={{ borderRadius: 0, width: 50, height: 50 }} src={failed_img} />
-      }
-    },
-    {
-      title: '链接',
-      dataIndex: 'url',
+      title: '金币余额',
+      dataIndex: 'amount',
       width: 150,
     },
-    {
-      title: '短链接',
-      dataIndex: 'url_short',
-      width: 150,
-    },
-    {
-      title: '其他1',
-      dataIndex: 'str1',
-      width: 150,
-    },
-    {
-      title: '其他2',
-      dataIndex: 'str2',
-      width: 150,
-    },
-    {
-      title: '其他3',
-      dataIndex: 'str3',
-      width: 150,
-    },
-    {
-      title: '其他4',
-      dataIndex: 'str4',
-      width: 150,
-    },
-    {
-      title: '操作',
-      dataIndex: '_id',
-      width: 150,
-      render: (_id, record) => (
-        <Fragment>
-          <Link to={{ pathname: '/form/jiafang-detail', query: { _id: _id } }}>详情</Link>
-        </Fragment>
-      ),
-    },
-    // {
-    //   title: '操作',
-    //   render: (text, record) => (
-    //     <Fragment>
-    //       <a href="/form/yifang-detail">详情</a>
-    //     </Fragment>
-    //   ),
-    // },
   ];
 
   componentDidMount() {
@@ -193,11 +134,11 @@ class TableList extends PureComponent {
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="规则名称">
-              {getFieldDecorator('name')(<Input placeholder="请输入" />)}
+            <FormItem label="用户ID">
+              {getFieldDecorator('name')(<Input placeholder="请输入用户ID" />)}
             </FormItem>
           </Col>
-          <Col md={8} sm={24}>
+          {/* <Col md={8} sm={24}>
             <FormItem label="使用状态">
               {getFieldDecorator('status')(
                 <Select placeholder="请选择" style={{ width: '100%' }}>
@@ -206,11 +147,11 @@ class TableList extends PureComponent {
                 </Select>
               )}
             </FormItem>
-          </Col>
+          </Col> */}
           <Col md={8} sm={24}>
-            <FormItem label="更新日期">
+            <FormItem label="注册时间">
               {getFieldDecorator('date')(
-                <DatePicker style={{ width: '100%' }} placeholder="请输入更新日期" />
+                <DatePicker style={{ width: '100%' }} placeholder="请输入注册日期" />
               )}
             </FormItem>
           </Col>
@@ -233,11 +174,19 @@ class TableList extends PureComponent {
   }
 
   render() {
-    const {
+    let {
       rule: { data },
       loading,
     } = this.props;
     const { stepFormValues } = this.state;
+  data = {
+    list:[
+      // {id:'02b89ebb6150ed00',time:	'2020/9/23 23:13:15'	,amount:'105'},
+      // {id:'c6b13c9749d53fac',time:	'2020/9/23 22:53:47'	,amount:'0'},
+      {id:'8b44d038f1bd9ce3',time:	'2020/9/24 23:07:02'	,amount:'0'},
+    ],
+    pagination:{total:3}
+  }
 
     return (
       <PageHeaderWrapper title="查询表格">

@@ -60,90 +60,75 @@ class TableList extends PureComponent {
 
   columns = [
     {
-      title: '手机号',
-      dataIndex: 'username',
+      title: '用户ID',
+      dataIndex: 'id',
     },
     {
-      title: 'app名称',
-      dataIndex: 'app_name',
+      title: '消费时间',
+      dataIndex: 'time',
     },
     {
-      title: '时间',
-      dataIndex: 'created',
-      render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
+      title: '消费金币',
+      dataIndex: 'used',
     },
     {
-      title: '人脸识别',
-      dataIndex: 'is_face_info',
-      render(val) {
-        return (
-          <Badge status={statusMap[val === true ? 1 : 0]} text={status[val === true ? 1 : 0]} />
-        );
-      },
+      title: '剩余金币',
+      dataIndex: 'remain',
     },
-    {
-      title: '银行绑定',
-      dataIndex: 'is_bank',
-      render(val) {
-        return (
-          <Badge status={statusMap[val === true ? 1 : 0]} text={status[val === true ? 1 : 0]} />
-        );
-      },
-    },
-    {
-      title: '点击评估',
-      dataIndex: 'is_evaluate_report',
-      render(val) {
-        return (
-          <Badge status={statusMap[val ? 1 : 0]} text={status[val  ? 1 : 0]} />
-        );
-      },
-    },
-    {
-      title: '评估付费',
-      dataIndex: 'is_evaluate_report_time',
-      render(val) {
-        return (
-          <Badge status={statusMap[val ? 1 : 0]} text={status[val  ? 1 : 0]} />
-        );
-      },
-    },
-    {
-      title: '推荐付费',
-      dataIndex: 'is_smart_recommend_time',
-      render(val) {
-        return (
-          <Badge status={statusMap[val  ? 1 : 0]} text={status[val ? 1 : 0]} />
-        );
-      },
-    },
-    {
-      title: '乙方',
-      dataIndex: 'parent',
-    },
-    {
-      title: '首次退款状态',
-      dataIndex: 'first_refund_status',
-      render(val) {
-        return <Badge status={statusMap[0]} text={refundDic[val]} />;
-      },
-    },
-    {
-      title: '二次退款状态',
-      dataIndex: 'refund_status',
-      render(val) {
-        return <Badge status={statusMap[0]} text={refundDic[val]} />;
-      },
-    },
-    {
-      title: '操作',
-      dataIndex: '_id',
-      render: (_id, record) => (
-        <Fragment>
-          <Link to={{ pathname: '/form/user-detail', query: { _id: _id } }}>详情</Link>
-        </Fragment>
-      ),
-    },
+    // {
+    //   title: '点击评估',
+    //   dataIndex: 'is_evaluate_report',
+    //   render(val) {
+    //     return (
+    //       <Badge status={statusMap[val ? 1 : 0]} text={status[val  ? 1 : 0]} />
+    //     );
+    //   },
+    // },
+    // {
+    //   title: '评估付费',
+    //   dataIndex: 'is_evaluate_report_time',
+    //   render(val) {
+    //     return (
+    //       <Badge status={statusMap[val ? 1 : 0]} text={status[val  ? 1 : 0]} />
+    //     );
+    //   },
+    // },
+    // {
+    //   title: '推荐付费',
+    //   dataIndex: 'is_smart_recommend_time',
+    //   render(val) {
+    //     return (
+    //       <Badge status={statusMap[val  ? 1 : 0]} text={status[val ? 1 : 0]} />
+    //     );
+    //   },
+    // },
+    // {
+    //   title: '乙方',
+    //   dataIndex: 'parent',
+    // },
+    // {
+    //   title: '首次退款状态',
+    //   dataIndex: 'first_refund_status',
+    //   render(val) {
+    //     return <Badge status={statusMap[0]} text={refundDic[val]} />;
+    //   },
+    // },
+    // {
+    //   title: '二次退款状态',
+    //   dataIndex: 'refund_status',
+    //   render(val) {
+    //     return <Badge status={statusMap[0]} text={refundDic[val]} />;
+    //   },
+    // },
+    // {
+    //   title: '操作',
+    //   dataIndex: '_id',
+    //   render: (_id, record) => (
+    //     <Fragment>
+    //       <Link to={{ pathname: '/form/user-detail', query: { _id: _id } }}>详情</Link>
+    //     </Fragment>
+    //   ),
+    // },
   ];
 
   componentDidMount() {
@@ -210,91 +195,54 @@ class TableList extends PureComponent {
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-          <Col md={4} sm={24}>
-            <FormItem label="乙方账号">
-              {getFieldDecorator('parent')(<Input placeholder="请输入" />)}
+          <Col md={6} sm={24}>
+            <FormItem label="用户ID">
+              {getFieldDecorator('username')(<Input placeholder="请输入用户ID" />)}
             </FormItem>
           </Col>
-
-          <Col md={4} sm={24}>
-            <FormItem label="用户名">
-              {getFieldDecorator('username')(<Input placeholder="请输入" />)}
+          {/* <Col md={6} sm={24}>
+            <FormItem label="游戏类型">
+              {(<Input placeholder="请输入游戏类型" />)}
+            </FormItem>
+          </Col> */}
+        </Row> <Row gutter={{ md: 12, lg: 24, xl: 48 }}>
+          <Col md={6} sm={24}>
+            <FormItem label="消费金币">
+              {getFieldDecorator('vass')(<Input placeholder="最小" />)}
             </FormItem>
           </Col>
-          <Col md={4} sm={24}>
-            <FormItem label="银行绑定">
-              {getFieldDecorator('is_bank')(
-                <Select placeholder="银行绑定" style={{ width: '100%' }}>
-                  <Option value="">默认</Option>
-                  <Option value="false">否</Option>
-                  <Option value="true">是</Option>
-                </Select>
-              )}
-            </FormItem>
+           <Col md={1} sm={1}>
+             到
           </Col>
-          <Col md={4} sm={24}>
-            <FormItem label="首次付费">
-              {getFieldDecorator('is_evaluate_report')(
-                <Select placeholder="首次付费" style={{ width: '100%' }}>
-                  <Option value="">默认</Option>
-                  <Option value="false">否</Option>
-                  <Option value="true">是</Option>
-                </Select>
-              )}
-            </FormItem>
-          </Col>
-          <Col md={4} sm={24}>
-            <FormItem label="二次付费">
-              {getFieldDecorator('is_smart_recommend')(
-                <Select placeholder="二次付费" style={{ width: '100%' }}>
-                  <Option value="">默认</Option>
-                  <Option value="false">否</Option>
-                  <Option value="true">是</Option>
-                </Select>
-              )}
-            </FormItem>
-          </Col>
-          <Col md={4} sm={24}>
-            <FormItem label="创建日期">
-              {getFieldDecorator('created_date')(
-                <DatePicker
-                  format="YYYY/MM/DD"
-                  style={{ width: '100%' }}
-                  placeholder="请输入更新日期"
-                />
-              )}
+          <Col md={6} sm={24}>
+            <FormItem>
+              {(<Input placeholder="最大" />)}
             </FormItem>
           </Col>
         </Row>
-        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-          <Col md={4} sm={24}>
-            <FormItem label="首次退款">
-              {getFieldDecorator('first_refund_status')(
-                <Select placeholder="首次退款" style={{ width: '100%' }}>
-                  <Option value="">默认</Option>
-                  <Option value="submit">已申请</Option>
-                  <Option value="unpass">未通过</Option>
-                  <Option value="unpay">待打款</Option>
-                  <Option value="pay">已付款</Option>
-                </Select>
-              )}
+        <Row gutter={{ md: 12, lg: 24, xl: 48 }}>
+          <Col md={6} sm={24}>
+            <FormItem  label="消费时间">
+                  {getFieldDecorator('created_date')(
+                    <DatePicker  md={8}
+                      format="YYYY/MM/DD"
+                      style={{ width: '100%' }}
+                      placeholder="开始日期"
+                    />
+                )}
             </FormItem>
           </Col>
-          <Col md={4} sm={24}>
-            <FormItem label="二次退款">
-              {getFieldDecorator('refund_status')(
-                <Select placeholder="二次退款" style={{ width: '100%' }}>
-                  <Option value="">默认</Option>
-                  <Option value="submit">已申请</Option>
-                  <Option value="unpass">未通过</Option>
-                  <Option value="unpay">待打款</Option>
-                  <Option value="pay">已付款</Option>
-                </Select>
-              )}
-            </FormItem>
+          <Col md={1} sm={24}>到</Col>
+          <Col md={6} sm={24}>
+            {getFieldDecorator('created_date')(
+              <DatePicker  md={8}
+                format="YYYY/MM/DD"
+                style={{ width: '100%' }}
+                placeholder="结束日期"
+              />
+            )}
           </Col>
         </Row>
-
         <div style={{ overflow: 'hidden' }}>
           <div style={{ float: 'right', marginBottom: 24 }}>
             <Button type="primary" htmlType="submit">
@@ -307,11 +255,30 @@ class TableList extends PureComponent {
   }
 
   render() {
-    const {
+    let {
       rule: { data },
       loading,
     } = this.props;
     const { stepFormValues } = this.state;
+    data={
+      list:[
+        // {id:'02b89ebb6150ed00',time:'2020/9/27 23:26:15'	,used:'-3820'	,remain:'26180'},
+      	// {id:'02b89ebb6150ed00',time:'2020/9/27 23:43:03'	,used:'-5768'	,remain:'20412'},
+      	// {id:'02b89ebb6150ed00',time:'2020/9/27 23:57:21'	,used:'-9057'	,remain:'11355'},
+      	// {id:'02b89ebb6150ed00',time:'2020/9/28 00:12:01'	,used:'+2419'	,remain:'13774'},
+        // {id:'02b89ebb6150ed00',time:'2020/9/28 00:29:45'	,used:'+691'	,remain:'14465'},
+
+        // {id:'c6b13c9749d53fac',time:'2020/9/27 23:27:05'	,used:'-1000'	,remain:'0'},
+
+        // {id:'1814460360',time:'2020/9/27 23:24',	used:'-180'	,remain:'2820'},
+	      // {id:'1814460360',time:'2020/9/27 23:27',	used:'-180'	,remain:'2640'},
+	      // {id:'1814460360',time:'2020/9/27 23:30',	used:'+90'	,remain:'2730'},
+	      // {id:'1814460360',time:'2020/9/27 23:35',	used:'-360'	,remain:'2370'},
+	      // {id:'1814460360',time:'2020/9/27 23:37',	used:'-720'	,remain:'1650'},
+
+      ],
+      pagination:{total:1  }
+    }
 
     return (
       <PageHeaderWrapper title="查询表格">
