@@ -3,7 +3,7 @@ import { stringify } from 'qs';
 // const baseUrl = 'http://nm.chaoqianwang.com'
 // const baseUrl = 'http://t.rongbeihulian.com'
 const baseUrl = 'http://ff.t10.ltd'; 
-// const baseUrl = 'http://localhost:7003'
+// const baseUrl = 'http://localho st:7003'
 export async function query() {
   return request('/api/users');
 }
@@ -17,6 +17,7 @@ export async function yop_refund_request(params) {
   return request(`${baseUrl}/yop_refund_request`, { method: 'POST', body: params });
 }
 export async function yop_refund_query(params) {
+
   return request(`${baseUrl}/yop_refund_query`, { method: 'POST', body: params });
 }
 export async function yop_bindcard_pay_query_by_user(params) {
