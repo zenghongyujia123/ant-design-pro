@@ -40,11 +40,11 @@
   "/28.async.js": "/28.async.js",
   "/29.async.js": "/29.async.js",
   "/index.html": "/index.html",
-  "/icons/icon-128x128.png": "/icons/icon-128x128.png",
   "/favicon.png": "/favicon.png",
+  "/icons/icon-128x128.png": "/icons/icon-128x128.png",
   "/icons/icon-192x192.png": "/icons/icon-192x192.png",
   "/manifest.json": "/manifest.json",
   "/pwacompat.min.js": "/pwacompat.min.js",
-  "/precache-manifest.0f907c4eb777704db6c3c722b80d5139.js": "/precache-manifest.0f907c4eb777704db6c3c722b80d5139.js",
+  "/precache-manifest.c8bbef43f0ab11be6a97b0a17dbc320c.js": "/precache-manifest.c8bbef43f0ab11be6a97b0a17dbc320c.js",
   "/service-worker.js": "/service-worker.js"
 }

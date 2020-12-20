@@ -20,11 +20,11 @@ self.__precacheManifest = [
     "url": "/3.async.js"
   },
   {
-    "revision": "3b20b4f91ced43d29086",
+    "revision": "86200bed20a4bcb9f0ec",
     "url": "/umi.css"
   },
   {
-    "revision": "3b20b4f91ced43d29086",
+    "revision": "86200bed20a4bcb9f0ec",
     "url": "/umi.js"
   },
   {
@@ -164,12 +164,12 @@ self.__precacheManifest = [
     "url": "/index.html"
   },
   {
-    "revision": "347329d0982682b42d40c8162817a940",
-    "url": "/icons/icon-128x128.png"
-  },
-  {
     "revision": "694c4300be571fdd4d8b6abbe14d2e3f",
     "url": "/favicon.png"
+  },
+  {
+    "revision": "347329d0982682b42d40c8162817a940",
+    "url": "/icons/icon-128x128.png"
   },
   {
     "revision": "c23aa881b8d0e959f6c0aeb5ae7e4baa",
